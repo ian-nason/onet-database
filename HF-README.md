@@ -19,7 +19,7 @@ A version-pinned, queryable DuckDB subset of the [O*NET 31.0 Database](https://w
 
 Use it for descriptive questions about what occupations require and what their work is like: skill importance and level, how often workers stand, bend or are exposed to disease, and the alternate titles an occupation goes by. It does not contain wages, employment counts, health outcomes or any person-level records.
 
-Built with [onet-database](https://github.com/ian-nason/onet-database). Published to Hugging Face on 2026-10-18. The datapond registry entry is a draft pull request, so `datapond.connect('onet')` does not resolve this database until it is merged; the direct URL below works now.
+Built with [onet-database](https://github.com/ian-nason/onet-database). Published to Hugging Face on 2026-10-18. The dataset is included in the public datapond catalog as `onet`. Use normal package discovery and connections, or the immutable direct URL below.
 
 [Quick start](#quick-start) · [Tables](#tables) · [Views](#pre-built-views) · [Examples](#example-queries) · [Caveats](#researcher-caveats) · [Source](#data-source-and-version) · [License](#license-and-attribution) · [Changelog](#changelog)
 
@@ -80,9 +80,9 @@ dbDisconnect(con, shutdown = TRUE)
 
 In the tested R DuckDB 1.5.5 configuration, BIGINT and DECIMAL results are exposed as doubles. Counts here are exactly representable; decimal ratings and confidence bounds may be approximate in R even though the stored DECIMAL values are exact.
 
-### datapond package (after catalog integration)
+### datapond package
 
-The public default catalog does not yet include `onet`. After its registry entry is merged, these examples use the package's normal discovery and connection API:
+These examples use the public default catalog and the package's normal discovery and connection API:
 
 ```python
 import datapond
@@ -102,7 +102,7 @@ DBI::dbGetQuery(con, "SELECT onet_soc_code, title FROM occupation_data ORDER BY 
 dp_disconnect(con)
 ```
 
-For repeated scans, after catalog integration, download once and connect locally:
+For repeated scans, download once and connect locally:
 
 ```python
 import datapond
@@ -122,7 +122,7 @@ dp_disconnect(con)
 
 Verify the recorded artifact SHA-256 after downloading. In tested Python 0.1.1, the optional Hugging Face download path follows the default branch rather than the pinned URL; see [consumer verification](https://github.com/ian-nason/onet-database/blob/main/docs/CONSUMERS.md) for the tested configuration.
 
-Package checks use an isolated candidate registry; default-catalog discovery remains pending. See [consumer verification](https://github.com/ian-nason/onet-database/blob/main/docs/CONSUMERS.md) for exact client versions, paths, resource limits and download behavior. The direct URL examples above work independently of the catalog. The SQL examples below use the `onet` catalog alias from the direct-URL quick start.
+Default-catalog discovery and representative remote queries were verified after the registry merge. Earlier full-download checks used an isolated candidate registry. See [consumer verification](https://github.com/ian-nason/onet-database/blob/main/docs/CONSUMERS.md) for exact client versions, paths, resource limits and download behavior. The direct URL examples above work independently of the catalog. The SQL examples below use the `onet` catalog alias from the direct-URL quick start.
 
 
 ## Tables
@@ -215,7 +215,7 @@ This product uses the **O*NET 31.0 Database**, produced by the **U.S. Department
 
 Datapond has modified the representation: selected 12 files; renamed columns to snake_case (`Date` → `update_date`); converted exact decimal/integer fields and empty fields to SQL types/NULL; added three views, metadata, dictionary, validation and examples. No source ratings, occupation titles, date tokens, flags or nonblank text values were revised, rescaled, imputed or suppressed. USDOL/ETA has not approved, endorsed or tested these modifications. The scripts and documentation describe every transformation. The database content license is CC BY 4.0; no public-domain claim is made. O*NET career exploration tools are outside this subset and this license statement.
 
-For citation, include O*NET release 31.0, USDOL/ETA, the CC BY 4.0 license link, this derivative's artifact SHA-256 and the recorded build date. Public-host verification is recorded in [PUBLICATION.md](https://github.com/ian-nason/onet-database/blob/main/PUBLICATION.md); catalog integration remains pending.
+For citation, include O*NET release 31.0, USDOL/ETA, the CC BY 4.0 license link, this derivative's artifact SHA-256 and the recorded build date. Public-host verification is recorded in [PUBLICATION.md](https://github.com/ian-nason/onet-database/blob/main/PUBLICATION.md); the dataset is now included in the public datapond catalog.
 
 ## GitHub, Dictionary and Website
 
@@ -223,17 +223,17 @@ For citation, include O*NET release 31.0, USDOL/ETA, the CC BY 4.0 license link,
 
 - Source, build scripts, tests and evidence: [github.com/ian-nason/onet-database](https://github.com/ian-nason/onet-database)
 - Column dictionary (every column, original header, type, NULL share, join hint): [DICTIONARY.md](https://github.com/ian-nason/onet-database/blob/main/DICTIONARY.md)
-- Catalog: [datapond registry](https://github.com/datapond-db/registry); the entry for `onet` is a draft pull request and the database will appear on the [datapond website](https://datapond-db.github.io/website/) once it is merged.
+- Catalog: [datapond registry](https://github.com/datapond-db/registry); `onet` is included in the public catalog and on the [datapond website](https://datapond-db.github.io/website/).
 
 ## Changelog
 
 ### 2026-10-18 — Documentation refresh
 
 - Added Python/R quick starts, table descriptions and column counts, view guidance, navigation, and clearer researcher caveats.
-- Database bytes, schema, source locks and validated query results are unchanged. Catalog integration remains pending.
+- Database bytes, schema, source locks and validated query results are unchanged. Catalog integration was pending at this documentation checkpoint; it is now complete.
 
 ### 2026-10-18 — Initial release
 
 - O*NET 31.0 subset: 468,857 rows across 12 tables (89 columns) and 3 views. Artifact 11,284,480 bytes, SHA-256 `b7908bb8…85c11b`, commit `d0e84bac`.
 - Every typed cell verified against an independent read of the pinned source ZIP; public immutable URL, HTTP range requests and the installed Python and R clients tested after upload.
-- Registry entry opened as a draft pull request; catalog integration pending.
+- Registry entry initially opened as a draft pull request; later merged after integration review.

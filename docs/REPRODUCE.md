@@ -2,7 +2,7 @@
 
 [Overview](../README.md) · [Dictionary](../DICTIONARY.md) · [Publication verification](../PUBLICATION.md)
 
-These detailed notes preserve the audited release documentation. Statements about local-only checks and later publication gates describe that earlier build stage; [PUBLICATION.md](../PUBLICATION.md) records the completed public-host verification. Catalog integration is still pending.
+These detailed notes preserve the audited release documentation. Statements about local-only checks and later publication gates describe that earlier build stage; [PUBLICATION.md](../PUBLICATION.md) records the completed public-host verification. Catalog integration is complete; see the current [consumer verification](CONSUMERS.md).
 
 
 The build uses Python 3.12, DuckDB 1.5.5 and the existing datapond-build helper from the already provisioned FJC judges virtual environment. `runtime.json` records the interpreter, every installed package/version, and the source module/hash of each used helper function. No software was installed for this candidate. In a separately provisioned environment, use the declared dependencies in `pyproject.toml`.
