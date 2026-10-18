@@ -1,3 +1,5 @@
+> **Published October 18, 2026:** see [verified public release and immutable query URL](PUBLICATION.md). Audit/status statements below record the frozen pre-publication snapshot. Registry discovery awaits draft PR review.
+
 ---
 license: cc-by-4.0
 pretty_name: O*NET 31.0 Occupations, Skills and Work Context

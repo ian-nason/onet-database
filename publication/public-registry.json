@@ -1,0 +1,12 @@
+{
+  "databases": [
+    {
+      "id": "onet",
+      "name": "ONET audited release",
+      "rows": 468857,
+      "tables": 12,
+      "size_gb": 0.01128448,
+      "attach_url": "https://huggingface.co/datasets/Nason/onet-database/resolve/d0e84bacef02d4477423edbf7468cc3ec8fb79c2/onet.duckdb"
+    }
+  ]
+}
