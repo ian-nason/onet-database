@@ -1,0 +1,1122 @@
+{
+  "status": "validated_local_not_published",
+  "release": "31.0",
+  "built_at_utc": "2026-10-18T13:46:27.483284+00:00",
+  "duckdb": "1.5.5",
+  "archive": {
+    "url": "https://www.onetcenter.org/dl_files/database/db_31_0_csv.zip",
+    "bytes": 16237378,
+    "sha256": "55033fc68b4c13ec23e7f74dc6378660f6e854e75d55d6e333ae0a761d3987cd",
+    "headers": {
+      "Content-Length": "16237378",
+      "Last-Modified": "Tue, 25 Aug 2026 03:49:29 GMT",
+      "ETag": "\"6a8d10c9-f7c342\""
+    }
+  },
+  "database_bytes": 11284480,
+  "database_sha256": "b7908bb82e50d4aa0310a6400e2193e2b11946a9d663ff2c8f1171037585c11b",
+  "rows": 468857,
+  "data_tables": 12,
+  "dictionary_columns": 89,
+  "validation": {
+    "occupation_data: keys": 0,
+    "occupation_data: required onet_soc_code": 0,
+    "occupation_data: required title": 0,
+    "occupation_data: required description": 0,
+    "job_titles: keys": 0,
+    "job_titles: required onet_soc_code": 0,
+    "job_titles: required title": 0,
+    "job_titles: required job_title": 0,
+    "job_titles: required sources": 0,
+    "job_titles: occupation/title": 0,
+    "sample_of_reported_titles: keys": 0,
+    "sample_of_reported_titles: required onet_soc_code": 0,
+    "sample_of_reported_titles: required title": 0,
+    "sample_of_reported_titles: required reported_job_title": 0,
+    "sample_of_reported_titles: required shown_in_my_next_move": 0,
+    "sample_of_reported_titles: occupation/title": 0,
+    "essential_skills: keys": 0,
+    "essential_skills: required onet_soc_code": 0,
+    "essential_skills: required title": 0,
+    "essential_skills: required element_id": 0,
+    "essential_skills: required element_name": 0,
+    "essential_skills: required scale_id": 0,
+    "essential_skills: required scale_name": 0,
+    "essential_skills: required data_value": 0,
+    "essential_skills: required update_date": 0,
+    "essential_skills: required domain_source": 0,
+    "essential_skills: occupation/title": 0,
+    "essential_skills: element_id": 0,
+    "essential_skills: scale_id": 0,
+    "transferable_skills: keys": 0,
+    "transferable_skills: required onet_soc_code": 0,
+    "transferable_skills: required title": 0,
+    "transferable_skills: required element_id": 0,
+    "transferable_skills: required element_name": 0,
+    "transferable_skills: required scale_id": 0,
+    "transferable_skills: required scale_name": 0,
+    "transferable_skills: required data_value": 0,
+    "transferable_skills: required update_date": 0,
+    "transferable_skills: required domain_source": 0,
+    "transferable_skills: occupation/title": 0,
+    "transferable_skills: element_id": 0,
+    "transferable_skills: scale_id": 0,
+    "work_context: keys": 0,
+    "work_context: required onet_soc_code": 0,
+    "work_context: required title": 0,
+    "work_context: required element_id": 0,
+    "work_context: required element_name": 0,
+    "work_context: required scale_id": 0,
+    "work_context: required scale_name": 0,
+    "work_context: required data_value": 0,
+    "work_context: required update_date": 0,
+    "work_context: required domain_source": 0,
+    "work_context: occupation/title": 0,
+    "work_context: element_id": 0,
+    "work_context: scale_id": 0,
+    "content_model_reference: keys": 0,
+    "content_model_reference: required element_id": 0,
+    "content_model_reference: required element_name": 0,
+    "scales_reference: keys": 0,
+    "scales_reference: required scale_id": 0,
+    "scales_reference: required scale_name": 0,
+    "scales_reference: required minimum": 0,
+    "scales_reference: required maximum": 0,
+    "level_scale_anchors: keys": 0,
+    "level_scale_anchors: required element_id": 0,
+    "level_scale_anchors: required element_name": 0,
+    "level_scale_anchors: required scale_id": 0,
+    "level_scale_anchors: required scale_name": 0,
+    "level_scale_anchors: required anchor_value": 0,
+    "level_scale_anchors: required anchor_description": 0,
+    "level_scale_anchors: element_id": 0,
+    "level_scale_anchors: scale_id": 0,
+    "work_context_categories: keys": 0,
+    "work_context_categories: required element_id": 0,
+    "work_context_categories: required element_name": 0,
+    "work_context_categories: required scale_id": 0,
+    "work_context_categories: required scale_name": 0,
+    "work_context_categories: required category": 0,
+    "work_context_categories: required category_description": 0,
+    "work_context_categories: element_id": 0,
+    "work_context_categories: scale_id": 0,
+    "occupation_level_metadata: keys": 0,
+    "occupation_level_metadata: required onet_soc_code": 0,
+    "occupation_level_metadata: required title": 0,
+    "occupation_level_metadata: required item": 0,
+    "occupation_level_metadata: required update_date": 0,
+    "occupation_level_metadata: occupation/title": 0,
+    "survey_booklet_locations: keys": 0,
+    "survey_booklet_locations: required element_id": 0,
+    "survey_booklet_locations: required element_name": 0,
+    "survey_booklet_locations: required survey_item_number": 0,
+    "survey_booklet_locations: required scale_id": 0,
+    "survey_booklet_locations: required scale_name": 0,
+    "survey_booklet_locations: element_id": 0,
+    "survey_booklet_locations: scale_id": 0,
+    "essential_skills: scales": 0,
+    "essential_skills: flags": 0,
+    "essential_skills: uncertainty": 0,
+    "transferable_skills: scales": 0,
+    "transferable_skills: flags": 0,
+    "transferable_skills: uncertainty": 0,
+    "work_context: scales": 0,
+    "work_context: flags": 0,
+    "work_context: uncertainty": 0,
+    "context category labels": 0,
+    "context grain": 0,
+    "skill domain overlap": 0
+  },
+  "source_comparison": {
+    "occupation_data": {
+      "rows": 1016,
+      "all_cells_equal": true,
+      "typed_rows_sha256": "fb1e55ac94e46cfca5822da998c9c08b0af908ab17f8eed6c0fa9eb9e851f5a9",
+      "null_counts": {
+        "onet_soc_code": 0,
+        "title": 0,
+        "description": 0
+      },
+      "samples": [
+        {
+          "record": 1,
+          "source": [
+            "11-1011.00",
+            "Chief Executives",
+            "Determine and formulate policies and provide overall direction of companies or private and public sector organizations within guidelines set up by a board of directors or similar governing body. Plan, direct, or coordinate operational activities at the highest level of management with the help of subordinate executives and staff managers."
+          ],
+          "typed": [
+            "11-1011.00",
+            "Chief Executives",
+            "Determine and formulate policies and provide overall direction of companies or private and public sector organizations within guidelines set up by a board of directors or similar governing body. Plan, direct, or coordinate operational activities at the highest level of management with the help of subordinate executives and staff managers."
+          ]
+        },
+        {
+          "record": 508,
+          "source": [
+            "31-1121.00",
+            "Home Health Aides",
+            "Monitor the health status of an individual with disabilities or illness, and address their health-related needs, such as changing bandages, dressing wounds, or administering medication. Work is performed under the direction of offsite or intermittent onsite licensed nursing staff. Provide assistance with routine healthcare tasks or activities of daily living, such as feeding, bathing, toileting, or ambulation. May also help with tasks such as preparing meals, doing light housekeeping, and doing laundry depending on the patient's abilities."
+          ],
+          "typed": [
+            "31-1121.00",
+            "Home Health Aides",
+            "Monitor the health status of an individual with disabilities or illness, and address their health-related needs, such as changing bandages, dressing wounds, or administering medication. Work is performed under the direction of offsite or intermittent onsite licensed nursing staff. Provide assistance with routine healthcare tasks or activities of daily living, such as feeding, bathing, toileting, or ambulation. May also help with tasks such as preparing meals, doing light housekeeping, and doing laundry depending on the patient's abilities."
+          ]
+        },
+        {
+          "record": 1016,
+          "source": [
+            "55-3019.00",
+            "Military Enlisted Tactical Operations and Air/Weapons Specialists and Crew Members, All Other",
+            "All military enlisted tactical operations and air/weapons specialists and crewmembers not listed separately."
+          ],
+          "typed": [
+            "55-3019.00",
+            "Military Enlisted Tactical Operations and Air/Weapons Specialists and Crew Members, All Other",
+            "All military enlisted tactical operations and air/weapons specialists and crewmembers not listed separately."
+          ]
+        }
+      ]
+    },
+    "job_titles": {
+      "rows": 54269,
+      "all_cells_equal": true,
+      "typed_rows_sha256": "1b0f30ccb5896ea14a93e4898f15d01b3e3c8a2e50b178f61e6f5f325b207e00",
+      "null_counts": {
+        "onet_soc_code": 0,
+        "title": 0,
+        "job_title": 0,
+        "short_title": 49814,
+        "sources": 0
+      },
+      "samples": [
+        {
+          "record": 1,
+          "source": [
+            "11-1011.00",
+            "Chief Executives",
+            "Aeronautics Commission Director",
+            "",
+            "08"
+          ],
+          "typed": [
+            "11-1011.00",
+            "Chief Executives",
+            "Aeronautics Commission Director",
+            null,
+            "08"
+          ]
+        },
+        {
+          "record": 27134,
+          "source": [
+            "45-2092.00",
+            "Farmworkers and Laborers, Crop, Nursery, and Greenhouse",
+            "Shed Hand",
+            "",
+            "08"
+          ],
+          "typed": [
+            "45-2092.00",
+            "Farmworkers and Laborers, Crop, Nursery, and Greenhouse",
+            "Shed Hand",
+            null,
+            "08"
+          ]
+        },
+        {
+          "record": 54269,
+          "source": [
+            "55-3019.00",
+            "Military Enlisted Tactical Operations and Air/Weapons Specialists and Crew Members, All Other",
+            "Unattended Ground Sensor Specialist",
+            "",
+            "08"
+          ],
+          "typed": [
+            "55-3019.00",
+            "Military Enlisted Tactical Operations and Air/Weapons Specialists and Crew Members, All Other",
+            "Unattended Ground Sensor Specialist",
+            null,
+            "08"
+          ]
+        }
+      ]
+    },
+    "sample_of_reported_titles": {
+      "rows": 8189,
+      "all_cells_equal": true,
+      "typed_rows_sha256": "2ac667ce10874618ec2f7361ecf4ceb48c2d35e174c1e77dac1fe31de8c5b60e",
+      "null_counts": {
+        "onet_soc_code": 0,
+        "title": 0,
+        "reported_job_title": 0,
+        "shown_in_my_next_move": 0
+      },
+      "samples": [
+        {
+          "record": 1,
+          "source": [
+            "11-1011.00",
+            "Chief Executives",
+            "CEO (Chief Executive Officer)",
+            "Y"
+          ],
+          "typed": [
+            "11-1011.00",
+            "Chief Executives",
+            "CEO (Chief Executive Officer)",
+            "Y"
+          ]
+        },
+        {
+          "record": 4094,
+          "source": [
+            "31-2011.00",
+            "Occupational Therapy Assistants",
+            "Certified Occupational Assistant",
+            "N"
+          ],
+          "typed": [
+            "31-2011.00",
+            "Occupational Therapy Assistants",
+            "Certified Occupational Assistant",
+            "N"
+          ]
+        },
+        {
+          "record": 8189,
+          "source": [
+            "53-7121.00",
+            "Tank Car, Truck, and Ship Loaders",
+            "Truck Loader",
+            "Y"
+          ],
+          "typed": [
+            "53-7121.00",
+            "Tank Car, Truck, and Ship Loaders",
+            "Truck Loader",
+            "Y"
+          ]
+        }
+      ]
+    },
+    "essential_skills": {
+      "rows": 18200,
+      "all_cells_equal": true,
+      "typed_rows_sha256": "52ffe546c16e63434efb3e5707c2b030142e4ddd5d30d65f7376d75713fd270d",
+      "null_counts": {
+        "onet_soc_code": 0,
+        "title": 0,
+        "element_id": 0,
+        "element_name": 0,
+        "scale_id": 0,
+        "scale_name": 0,
+        "data_value": 0,
+        "n": 0,
+        "standard_error": 0,
+        "lower_ci_bound": 0,
+        "upper_ci_bound": 0,
+        "recommend_suppress": 0,
+        "not_relevant": 9100,
+        "update_date": 0,
+        "domain_source": 0
+      },
+      "samples": [
+        {
+          "record": 1,
+          "source": [
+            "11-1011.00",
+            "Chief Executives",
+            "2.A.1.a",
+            "Reading Comprehension",
+            "IM",
+            "Importance",
+            "4.12",
+            "8",
+            "0.1250",
+            "3.8800",
+            "4.3700",
+            "N",
+            "",
+            "08/2023",
+            "Analyst"
+          ],
+          "typed": [
+            "11-1011.00",
+            "Chief Executives",
+            "2.A.1.a",
+            "Reading Comprehension",
+            "IM",
+            "Importance",
+            "4.12",
+            8,
+            "0.1250",
+            "3.8800",
+            "4.3700",
+            "N",
+            null,
+            "08/2023",
+            "Analyst"
+          ]
+        },
+        {
+          "record": 9100,
+          "source": [
+            "29-9092.00",
+            "Genetic Counselors",
+            "2.A.2.d",
+            "Monitoring",
+            "LV",
+            "Level",
+            "3.00",
+            "8",
+            "0.0000",
+            "3.0000",
+            "3.0000",
+            "N",
+            "N",
+            "08/2026",
+            "Analyst"
+          ],
+          "typed": [
+            "29-9092.00",
+            "Genetic Counselors",
+            "2.A.2.d",
+            "Monitoring",
+            "LV",
+            "Level",
+            "3.00",
+            8,
+            "0.0000",
+            "3.0000",
+            "3.0000",
+            "N",
+            "N",
+            "08/2026",
+            "Analyst"
+          ]
+        },
+        {
+          "record": 18200,
+          "source": [
+            "53-7121.00",
+            "Tank Car, Truck, and Ship Loaders",
+            "2.A.2.d",
+            "Monitoring",
+            "LV",
+            "Level",
+            "3.12",
+            "8",
+            "0.1250",
+            "2.8800",
+            "3.3700",
+            "N",
+            "N",
+            "08/2019",
+            "Analyst"
+          ],
+          "typed": [
+            "53-7121.00",
+            "Tank Car, Truck, and Ship Loaders",
+            "2.A.2.d",
+            "Monitoring",
+            "LV",
+            "Level",
+            "3.12",
+            8,
+            "0.1250",
+            "2.8800",
+            "3.3700",
+            "N",
+            "N",
+            "08/2019",
+            "Analyst"
+          ]
+        }
+      ]
+    },
+    "transferable_skills": {
+      "rows": 45500,
+      "all_cells_equal": true,
+      "typed_rows_sha256": "c3da057f6bfa83cc9b70526a94aadb573cf387c4bfb42bcb86ca65b4401fbe11",
+      "null_counts": {
+        "onet_soc_code": 0,
+        "title": 0,
+        "element_id": 0,
+        "element_name": 0,
+        "scale_id": 0,
+        "scale_name": 0,
+        "data_value": 0,
+        "n": 0,
+        "standard_error": 0,
+        "lower_ci_bound": 0,
+        "upper_ci_bound": 0,
+        "recommend_suppress": 0,
+        "not_relevant": 22750,
+        "update_date": 0,
+        "domain_source": 0
+      },
+      "samples": [
+        {
+          "record": 1,
+          "source": [
+            "11-1011.00",
+            "Chief Executives",
+            "2.B.1.a",
+            "Social Perceptiveness",
+            "IM",
+            "Importance",
+            "4.12",
+            "8",
+            "0.1250",
+            "3.8800",
+            "4.3700",
+            "N",
+            "",
+            "08/2023",
+            "Analyst"
+          ],
+          "typed": [
+            "11-1011.00",
+            "Chief Executives",
+            "2.B.1.a",
+            "Social Perceptiveness",
+            "IM",
+            "Importance",
+            "4.12",
+            8,
+            "0.1250",
+            "3.8800",
+            "4.3700",
+            "N",
+            null,
+            "08/2023",
+            "Analyst"
+          ]
+        },
+        {
+          "record": 22750,
+          "source": [
+            "29-9092.00",
+            "Genetic Counselors",
+            "2.B.5.d",
+            "Management of Personnel Resources",
+            "LV",
+            "Level",
+            "2.75",
+            "8",
+            "0.1637",
+            "2.4292",
+            "3.0708",
+            "N",
+            "N",
+            "08/2026",
+            "Analyst"
+          ],
+          "typed": [
+            "29-9092.00",
+            "Genetic Counselors",
+            "2.B.5.d",
+            "Management of Personnel Resources",
+            "LV",
+            "Level",
+            "2.75",
+            8,
+            "0.1637",
+            "2.4292",
+            "3.0708",
+            "N",
+            "N",
+            "08/2026",
+            "Analyst"
+          ]
+        },
+        {
+          "record": 45500,
+          "source": [
+            "53-7121.00",
+            "Tank Car, Truck, and Ship Loaders",
+            "2.B.5.d",
+            "Management of Personnel Resources",
+            "LV",
+            "Level",
+            "2.75",
+            "8",
+            "0.1637",
+            "2.4292",
+            "3.0708",
+            "N",
+            "N",
+            "08/2019",
+            "Analyst"
+          ],
+          "typed": [
+            "53-7121.00",
+            "Tank Car, Truck, and Ship Loaders",
+            "2.B.5.d",
+            "Management of Personnel Resources",
+            "LV",
+            "Level",
+            "2.75",
+            8,
+            "0.1637",
+            "2.4292",
+            "3.0708",
+            "N",
+            "N",
+            "08/2019",
+            "Analyst"
+          ]
+        }
+      ]
+    },
+    "work_context": {
+      "rows": 305389,
+      "all_cells_equal": true,
+      "typed_rows_sha256": "a1315a921b6dd56f16401976e12b2d692e3cfb91a6f5bb1799fff952e692555f",
+      "null_counts": {
+        "onet_soc_code": 0,
+        "title": 0,
+        "element_id": 0,
+        "element_name": 0,
+        "scale_id": 0,
+        "scale_name": 0,
+        "category": 51927,
+        "data_value": 0,
+        "n": 513,
+        "standard_error": 84337,
+        "lower_ci_bound": 127478,
+        "upper_ci_bound": 127478,
+        "recommend_suppress": 83881,
+        "not_relevant": 305389,
+        "update_date": 0,
+        "domain_source": 0
+      },
+      "samples": [
+        {
+          "record": 1,
+          "source": [
+            "11-1011.00",
+            "Chief Executives",
+            "4.C.1.a.2.c",
+            "Public Speaking",
+            "CX",
+            "Context",
+            "",
+            "3.07",
+            "37",
+            "0.2851",
+            "2.4923",
+            "3.6486",
+            "N",
+            "",
+            "08/2023",
+            "Incumbent"
+          ],
+          "typed": [
+            "11-1011.00",
+            "Chief Executives",
+            "4.C.1.a.2.c",
+            "Public Speaking",
+            "CX",
+            "Context",
+            null,
+            "3.07",
+            37,
+            "0.2851",
+            "2.4923",
+            "3.6486",
+            "N",
+            null,
+            "08/2023",
+            "Incumbent"
+          ]
+        },
+        {
+          "record": 152694,
+          "source": [
+            "29-9093.00",
+            "Surgical Assistants",
+            "4.C.2.d.1.i",
+            "Spend Time Making Repetitive Motions",
+            "CXP",
+            "Context (Categories 1-5)",
+            "5",
+            "75.74",
+            "13",
+            "14.7398",
+            "35.2205",
+            "94.7145",
+            "N",
+            "",
+            "08/2026",
+            "Incumbent"
+          ],
+          "typed": [
+            "29-9093.00",
+            "Surgical Assistants",
+            "4.C.2.d.1.i",
+            "Spend Time Making Repetitive Motions",
+            "CXP",
+            "Context (Categories 1-5)",
+            5,
+            "75.74",
+            13,
+            "14.7398",
+            "35.2205",
+            "94.7145",
+            "N",
+            null,
+            "08/2026",
+            "Incumbent"
+          ]
+        },
+        {
+          "record": 305389,
+          "source": [
+            "53-7121.00",
+            "Tank Car, Truck, and Ship Loaders",
+            "4.C.3.d.8",
+            "Duration of Typical Work Week",
+            "CTP",
+            "Context (Categories 1-3)",
+            "3",
+            "82.44",
+            "32",
+            "9.8350",
+            "54.0119",
+            "94.9383",
+            "N",
+            "",
+            "08/2019",
+            "Incumbent"
+          ],
+          "typed": [
+            "53-7121.00",
+            "Tank Car, Truck, and Ship Loaders",
+            "4.C.3.d.8",
+            "Duration of Typical Work Week",
+            "CTP",
+            "Context (Categories 1-3)",
+            3,
+            "82.44",
+            32,
+            "9.8350",
+            "54.0119",
+            "94.9383",
+            "N",
+            null,
+            "08/2019",
+            "Incumbent"
+          ]
+        }
+      ]
+    },
+    "content_model_reference": {
+      "rows": 3006,
+      "all_cells_equal": true,
+      "typed_rows_sha256": "9b1c77cc16adec4e611f8b29d4ac81faae40b4bceeb6482cdd0243db7a28c992",
+      "null_counts": {
+        "element_id": 0,
+        "element_name": 0,
+        "description": 2419
+      },
+      "samples": [
+        {
+          "record": 1,
+          "source": [
+            "1",
+            "Worker Characteristics",
+            "Personal traits and abilities that affect how people learn and perform at work."
+          ],
+          "typed": [
+            "1",
+            "Worker Characteristics",
+            "Personal traits and abilities that affect how people learn and perform at work."
+          ]
+        },
+        {
+          "record": 1503,
+          "source": [
+            "4.A.3.a.1.q.8",
+            "Irrigate lawns, trees, or plants.",
+            ""
+          ],
+          "typed": [
+            "4.A.3.a.1.q.8",
+            "Irrigate lawns, trees, or plants.",
+            null
+          ]
+        },
+        {
+          "record": 3006,
+          "source": [
+            "6.B.1",
+            "Occupational Projections",
+            "Projections of future economic conditions and labor force characteristics of occupations"
+          ],
+          "typed": [
+            "6.B.1",
+            "Occupational Projections",
+            "Projections of future economic conditions and labor force characteristics of occupations"
+          ]
+        }
+      ]
+    },
+    "scales_reference": {
+      "rows": 33,
+      "all_cells_equal": true,
+      "typed_rows_sha256": "b39098b094e0e1b9ac4734c93e8b6712f7ea2dccbfad3473e910a0bdd8f52428",
+      "null_counts": {
+        "scale_id": 0,
+        "scale_name": 0,
+        "minimum": 0,
+        "maximum": 0
+      },
+      "samples": [
+        {
+          "record": 1,
+          "source": [
+            "AO",
+            "Automation",
+            "1",
+            "5"
+          ],
+          "typed": [
+            "AO",
+            "Automation",
+            1,
+            5
+          ]
+        },
+        {
+          "record": 16,
+          "source": [
+            "IM",
+            "Importance",
+            "1",
+            "5"
+          ],
+          "typed": [
+            "IM",
+            "Importance",
+            1,
+            5
+          ]
+        },
+        {
+          "record": 33,
+          "source": [
+            "WS",
+            "Work Schedule",
+            "1",
+            "3"
+          ],
+          "typed": [
+            "WS",
+            "Work Schedule",
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    "level_scale_anchors": {
+      "rows": 483,
+      "all_cells_equal": true,
+      "typed_rows_sha256": "84cfc22df144293d41d9ac7e35e2e76642a2835324ccaa0f6e77be3ee0e0ad26",
+      "null_counts": {
+        "element_id": 0,
+        "element_name": 0,
+        "scale_id": 0,
+        "scale_name": 0,
+        "anchor_value": 0,
+        "anchor_description": 0
+      },
+      "samples": [
+        {
+          "record": 1,
+          "source": [
+            "1.A.1.a.1",
+            "Oral Comprehension",
+            "LV",
+            "Level",
+            "2",
+            "Understand a television commercial"
+          ],
+          "typed": [
+            "1.A.1.a.1",
+            "Oral Comprehension",
+            "LV",
+            "Level",
+            2,
+            "Understand a television commercial"
+          ]
+        },
+        {
+          "record": 241,
+          "source": [
+            "2.B.4.e",
+            "Judgment and Decision Making",
+            "LV",
+            "Level",
+            "2",
+            "Decide how scheduling a break will affect work flow"
+          ],
+          "typed": [
+            "2.B.4.e",
+            "Judgment and Decision Making",
+            "LV",
+            "Level",
+            2,
+            "Decide how scheduling a break will affect work flow"
+          ]
+        },
+        {
+          "record": 483,
+          "source": [
+            "4.A.4.c.3",
+            "Monitoring and Controlling Resources",
+            "LV",
+            "Level",
+            "7",
+            "Serve as a financial executive in charge of a large company's budget"
+          ],
+          "typed": [
+            "4.A.4.c.3",
+            "Monitoring and Controlling Resources",
+            "LV",
+            "Level",
+            7,
+            "Serve as a financial executive in charge of a large company's budget"
+          ]
+        }
+      ]
+    },
+    "work_context_categories": {
+      "rows": 281,
+      "all_cells_equal": true,
+      "typed_rows_sha256": "5687425314138ec609468faf222ee03b9aa5524aad743f43faae132c932b669f",
+      "null_counts": {
+        "element_id": 0,
+        "element_name": 0,
+        "scale_id": 0,
+        "scale_name": 0,
+        "category": 0,
+        "category_description": 0
+      },
+      "samples": [
+        {
+          "record": 1,
+          "source": [
+            "4.C.1.a.2.c",
+            "Public Speaking",
+            "CXP",
+            "Context (Categories 1-5)",
+            "1",
+            "Never"
+          ],
+          "typed": [
+            "4.C.1.a.2.c",
+            "Public Speaking",
+            "CXP",
+            "Context (Categories 1-5)",
+            1,
+            "Never"
+          ]
+        },
+        {
+          "record": 140,
+          "source": [
+            "4.C.2.c.1.a",
+            "Exposed to Radiation",
+            "CXP",
+            "Context (Categories 1-5)",
+            "5",
+            "Every day"
+          ],
+          "typed": [
+            "4.C.2.c.1.a",
+            "Exposed to Radiation",
+            "CXP",
+            "Context (Categories 1-5)",
+            5,
+            "Every day"
+          ]
+        },
+        {
+          "record": 281,
+          "source": [
+            "4.C.3.d.8",
+            "Duration of Typical Work Week",
+            "CTP",
+            "Context (Categories 1-3)",
+            "3",
+            "More than 40 hours"
+          ],
+          "typed": [
+            "4.C.3.d.8",
+            "Duration of Typical Work Week",
+            "CTP",
+            "Context (Categories 1-3)",
+            3,
+            "More than 40 hours"
+          ]
+        }
+      ]
+    },
+    "occupation_level_metadata": {
+      "rows": 32280,
+      "all_cells_equal": true,
+      "typed_rows_sha256": "22907c6c58d36f36165c57705b42d895ccc7c69aa7ccb2e4d21bcd682b96831e",
+      "null_counts": {
+        "onet_soc_code": 0,
+        "title": 0,
+        "item": 0,
+        "response": 4668,
+        "n": 3766,
+        "percent": 902,
+        "update_date": 0
+      },
+      "samples": [
+        {
+          "record": 1,
+          "source": [
+            "11-1011.00",
+            "Chief Executives",
+            "Data Collection Mode",
+            "Paper",
+            "95",
+            "18.9",
+            "08/2023"
+          ],
+          "typed": [
+            "11-1011.00",
+            "Chief Executives",
+            "Data Collection Mode",
+            "Paper",
+            95,
+            "18.9",
+            "08/2023"
+          ]
+        },
+        {
+          "record": 16140,
+          "source": [
+            "39-3012.00",
+            "Gambling and Sports Book Writers and Runners",
+            "Industry Division (Major Group Codes (SIC) within Division in parentheses)",
+            "Manufacturing (20-39)",
+            "25",
+            "0.0",
+            "08/2026"
+          ],
+          "typed": [
+            "39-3012.00",
+            "Gambling and Sports Book Writers and Runners",
+            "Industry Division (Major Group Codes (SIC) within Division in parentheses)",
+            "Manufacturing (20-39)",
+            25,
+            "0.0",
+            "08/2026"
+          ]
+        },
+        {
+          "record": 32280,
+          "source": [
+            "53-7121.00",
+            "Tank Car, Truck, and Ship Loaders",
+            "Total Completed Questionnaires",
+            "",
+            "86",
+            "",
+            "08/2019"
+          ],
+          "typed": [
+            "53-7121.00",
+            "Tank Car, Truck, and Ship Loaders",
+            "Total Completed Questionnaires",
+            null,
+            86,
+            null,
+            "08/2019"
+          ]
+        }
+      ]
+    },
+    "survey_booklet_locations": {
+      "rows": 211,
+      "all_cells_equal": true,
+      "typed_rows_sha256": "4e2fa87c2947b73bf2585e713051ccb6a49a75bdabbf81aff0071e9586b0b22c",
+      "null_counts": {
+        "element_id": 0,
+        "element_name": 0,
+        "survey_item_number": 0,
+        "scale_id": 0,
+        "scale_name": 0
+      },
+      "samples": [
+        {
+          "record": 1,
+          "source": [
+            "2.C.1.a",
+            "Administration and Management",
+            "KN01",
+            "IM",
+            "Importance"
+          ],
+          "typed": [
+            "2.C.1.a",
+            "Administration and Management",
+            "KN01",
+            "IM",
+            "Importance"
+          ]
+        },
+        {
+          "record": 105,
+          "source": [
+            "4.A.3.a.2",
+            "Handling and Moving Objects",
+            "GW17",
+            "IM",
+            "Importance"
+          ],
+          "typed": [
+            "4.A.3.a.2",
+            "Handling and Moving Objects",
+            "GW17",
+            "IM",
+            "Importance"
+          ]
+        },
+        {
+          "record": 211,
+          "source": [
+            "4.C.3.d.8",
+            "Duration of Typical Work Week",
+            "WC25",
+            "HW",
+            "Hours Per Week"
+          ],
+          "typed": [
+            "4.C.3.d.8",
+            "Duration of Typical Work Week",
+            "WC25",
+            "HW",
+            "Hours Per Week"
+          ]
+        }
+      ]
+    }
+  },
+  "all_cells_reverified_after_read_only_reopen": true,
+  "build_input_sha256": {
+    "onet.py": "f34592b388edb5be02e101efff256e7ad16b3d4fabfd6675faf2ad2801a02969",
+    "schema.json": "5ae38a7f570dc77fb0f0af45f8dee24fb08616f5ccce22ea72a49dbaf3d5393e",
+    "source-lock.json": "1424351a46702cc6ea4104797a59bfc74bb72e9d83c79d94b66c69d4a80d36f7",
+    "pyproject.toml": "24cee70f5d037d71230792f702e765f0597a27aba39d316de249a563d847d873"
+  }
+}

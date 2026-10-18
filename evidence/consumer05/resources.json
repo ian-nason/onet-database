@@ -1,0 +1,18 @@
+{
+  "name": "consumer05",
+  "command": [
+    "consumer_probe.py",
+    "--rscript",
+    "/home/inason/miniconda3/envs/datapond-r/bin/Rscript",
+    "--r-lib-root",
+    "/mnt/c/Users/ignna/Documents/Codex/2026-10-17/task-2/libraries"
+  ],
+  "exit_code": 0,
+  "stop_reason": null,
+  "elapsed_seconds": 3.81,
+  "peak_group_rss_bytes_sampled": 251056128,
+  "peak_owned_disk_bytes_sampled": 428411960,
+  "minimum_available_memory_bytes": 9562411008,
+  "sample_interval_seconds": 0.25,
+  "completed_utc": "2026-10-18T13:33:52.766822+00:00"
+}

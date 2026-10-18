@@ -1,0 +1,32 @@
+test_missing_category_rejected (test_onet.DistributionChecks.test_missing_category_rejected) ... ok
+test_unknown_title_source_code_rejected (test_onet.DistributionChecks.test_unknown_title_source_code_rejected) ... ok
+test_wrong_percentage_total_rejected (test_onet.DistributionChecks.test_wrong_percentage_total_rejected) ... ok
+test_both_category_scale_families_valid (test_onet.SemanticChecks.test_both_category_scale_families_valid) ... ok
+test_category_omitted_rejected (test_onet.SemanticChecks.test_category_omitted_rejected) ... ok
+test_duplicate_mean_without_category_rejected (test_onet.SemanticChecks.test_duplicate_mean_without_category_rejected) ... ok
+test_mean_percentage_confusion_rejected (test_onet.SemanticChecks.test_mean_percentage_confusion_rejected) ... ok
+test_orphan_occupation_rejected (test_onet.SemanticChecks.test_orphan_occupation_rejected) ... ok
+test_suppressed_value_retained (test_onet.SemanticChecks.test_suppressed_value_retained) ... ok
+test_unknown_flag_rejected (test_onet.SemanticChecks.test_unknown_flag_rejected) ... ok
+test_wrong_category_dictionary_rejected (test_onet.SemanticChecks.test_wrong_category_dictionary_rejected) ... ok
+test_duplicate_zip_member (test_onet.SourceAudit.test_duplicate_zip_member) ... /usr/lib/python3.12/zipfile/__init__.py:1620: UserWarning: Duplicate name: 'x.csv'
+  return self._open_to_write(zinfo, force_zip64=force_zip64)
+ok
+test_existing_output_refused (test_onet.SourceAudit.test_existing_output_refused) ... ok
+test_hash_mismatch_rejected (test_onet.SourceAudit.test_hash_mismatch_rejected) ... ok
+test_inflated_zip_size (test_onet.SourceAudit.test_inflated_zip_size) ... ok
+test_missing_zip_member (test_onet.SourceAudit.test_missing_zip_member) ... ok
+test_partial_preserved_with_actionable_failure (test_onet.SourceAudit.test_partial_preserved_with_actionable_failure) ... ok
+test_typed_source_comparison_detects_modified_value (test_onet.SourceAudit.test_typed_source_comparison_detects_modified_value) ... ok
+test_wrong_zip_member_size (test_onet.SourceAudit.test_wrong_zip_member_size) ... ok
+test_blank_is_not_zero (test_onet.Values.test_blank_is_not_zero) ... ok
+test_code_and_source_leading_zero_preserved (test_onet.Values.test_code_and_source_leading_zero_preserved) ... ok
+test_four_decimal_precision (test_onet.Values.test_four_decimal_precision) ... ok
+test_no_silent_numeric_coercion (test_onet.Values.test_no_silent_numeric_coercion) ... ok
+test_update_month_preserved_and_validated (test_onet.Values.test_update_month_preserved_and_validated) ... ok
+test_sampler_failure_stops_worker (test_guard.Guard.test_sampler_failure_stops_worker) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.354s
+
+OK

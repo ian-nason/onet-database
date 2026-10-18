@@ -1,0 +1,36 @@
+I reviewed the supplied payload only. No commands were run and no hashes were recomputed, so "verified" below means consistency between independently produced files in the bundle.
+
+**Verdict.** All eight prior findings are resolved with evidence present in the payload, not just asserted in the disposition. I found no new ingestion, typing, decimal, null, grain, suppression, metadata or license defect in the final candidate. The local candidate is ready for a publication approval request. The remaining blockers are the already acknowledged external gates.
+
+## Reconciliation of prior findings
+
+- **F1 resolved.** `evidence/final-build/resources.json` now has exactly the keys written by `run_guarded.py:35`, including the guard hash, the full interpreter path and complete argv. Its completion time is 160 ms after the build report timestamp. The same guard hash appears in `evidence/final-reproduction.json`. README figures match the receipt.
+- **F2 resolved.** `audit_release.py:44-46` computes the helper comparison against `helper-lock.json` and fails on mismatch. The hand-typed string is gone. The install-origin mismatch with the pyproject pin remains and is now disclosed at README line 95. The lock's derivation from `git show` is a claim I cannot check.
+- **F3 resolved.** Paths are arguments or environment at `consumer_probe.py:34` and `consumer.R:3`. Per-file hashes of both installed R clients are in the consumer report.
+- **F4 resolved.** `evidence/examples.json` and `evidence/python-consumer.txt` are supplied and bound to the final hash. The README month spans match the recorded ranges.
+- **F5, F6, F7, F8 resolved** as described, with code present at `onet.py:86`, `audit_release.py:6`, `onet.py:184-185`, and the F8 items. The optimisation guard at `consumer_probe.py:33` covers the remaining bare asserts in that file.
+
+## New findings
+
+All are low. None changes the artifact.
+
+- **Low. Helper pin covers one module.** `onet.py:5` imports three functions from the package, but `audit_release.py:45` hashes only `metadata.py`. If any imported function lives in another module, it is unpinned. Fix: hash every module under the installed package directory, or record the three functions' source modules and hash each.
+- **Low. Build ran from another project's virtual environment.** The guard command uses the interpreter under `fjc-judges-database/.venv`. Nothing in the payload shows that environment's full package set. Fix: record `pip freeze` or the uv lock of that interpreter alongside `runtime.json`, or state in README that the build venv is shared with the FEC judges project.
+- **Low. Archive fixture assertions are loose.** `test_onet.py:93` uses bare `assertRaises(ValueError)` for the missing, duplicate and size variants. Fix: use `assertRaisesRegex` with the specific message so each fixture proves its own path.
+- **Low. Release date bound is hardcoded.** `audit_release.py:18` uses `DATE '2026-08-01'`. Fix: derive the upper bound from the lock's `Last-Modified` or add a `release_month` field to `source-lock.json`.
+- **Low. Label mismatch.** `run_guarded.py:24` still reports the stop reason as "owned disk" while the receipt field is named workspace scope. Fix: rename the stop reason string.
+- **Low. Documentation.** README line 43 could state that distributions cover 902 occupations against 911 for means. Both counts follow from the recorded group diagnostics.
+- **Informational.** The disclosed stale-cache incident shows the R client reuses a cached attach URL across sessions. After publication, the attach URL must be stable or consumers with cached registries will fail the same way.
+
+## Evidence versus claims
+
+Cross-consistent in the payload: resources receipt schema against guard code; README timing and memory against the receipt; examples hash against the build report; 24 listed tests against 24 test methods; percentage group counts of 49,610 and 1,804 multiply out to the 253,462 percentage rows and both imply 902 occupations; dictionary null percentages against null counts; view counts against row arithmetic.
+
+Claims I cannot check from here: every SHA-256 value, the helper-lock derivation, the reproduction fingerprint identity, and the official row counts and source code list.
+
+## Remaining release blockers
+
+1. Destination approvals for the GitHub repository, Hugging Face dataset and registry branch.
+2. Public-host verification after upload: remote artifact hash, range requests, and Python and R client queries against the immutable URL.
+
+Nothing in the local candidate blocks requesting that approval.

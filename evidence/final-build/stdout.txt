@@ -1,0 +1,43 @@
+occupation_data 1016
+job_titles 54269
+sample_of_reported_titles 8189
+essential_skills 18200
+transferable_skills 45500
+work_context 305389
+content_model_reference 3006
+scales_reference 33
+level_scale_anchors 483
+work_context_categories 281
+occupation_level_metadata 32280
+survey_booklet_locations 211
+  occupation_data: 3 columns
+  job_titles: 5 columns
+  sample_of_reported_titles: 4 columns
+  essential_skills: 15 columns
+  transferable_skills: 15 columns
+  work_context: 16 columns
+  content_model_reference: 3 columns
+  scales_reference: 4 columns
+  level_scale_anchors: 6 columns
+  work_context_categories: 6 columns
+  occupation_level_metadata: 7 columns
+  survey_booklet_locations: 5 columns
+  Exported releases/31.0-final/DICTIONARY.md
+{
+  "status": "validated_local_not_published",
+  "release": "31.0",
+  "built_at_utc": "2026-10-18T13:31:08.087363+00:00",
+  "duckdb": "1.5.5",
+  "database_bytes": 11284480,
+  "database_sha256": "2819c2512b7f384c89f474a402ac7f992da675b4fcf5ac6131998cc760e0befd",
+  "rows": 468857,
+  "data_tables": 12,
+  "dictionary_columns": 89,
+  "all_cells_reverified_after_read_only_reopen": true,
+  "build_input_sha256": {
+    "onet.py": "f34592b388edb5be02e101efff256e7ad16b3d4fabfd6675faf2ad2801a02969",
+    "schema.json": "5ae38a7f570dc77fb0f0af45f8dee24fb08616f5ccce22ea72a49dbaf3d5393e",
+    "source-lock.json": "782cc672d01fd73839d526b0944983b6d70f53e05128cd15e7fad8fcffe9edf2",
+    "pyproject.toml": "24cee70f5d037d71230792f702e765f0597a27aba39d316de249a563d847d873"
+  }
+}

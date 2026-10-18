@@ -1,0 +1,119 @@
+{
+  "release": "31.0",
+  "archive": {
+    "url": "https://www.onetcenter.org/dl_files/database/db_31_0_csv.zip",
+    "bytes": 16237378,
+    "sha256": "55033fc68b4c13ec23e7f74dc6378660f6e854e75d55d6e333ae0a761d3987cd",
+    "headers": {
+      "Content-Length": "16237378",
+      "Last-Modified": "Tue, 25 Aug 2026 03:49:29 GMT",
+      "ETag": "\"6a8d10c9-f7c342\""
+    }
+  },
+  "retrieved_at_utc": "2026-10-18T13:07:49.984004+00:00",
+  "documentation_snapshots": [
+    {
+      "name": "contributing.html",
+      "sha256": "df142713a78b712184209cc3e6357cd510158566e9f4048b712bdabf2041465e",
+      "bytes": 9369,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "level_scale_anchors.html",
+      "sha256": "c8a8745ded955167ef85e2588abe91627bffe0a123259f34e933e534b577011e",
+      "bytes": 41563,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "transferable_skills.html",
+      "sha256": "b5d38ff9d8aecacfff5075025222182c1af2ee00abc2555c2ddfb60aff081a2d",
+      "bytes": 43935,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "work_context_categories.html",
+      "sha256": "a26ad6bcf3186f72581ee22d049c361b9b64178e21e1fd1977b1d5118d976c05",
+      "bytes": 41380,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "job_titles.html",
+      "sha256": "f507873d02469cf9549c77697bd2abc4fd68bf62d7f86145054e8749c45f450f",
+      "bytes": 41568,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "license.html",
+      "sha256": "150c03de18adde4b0748be2d7e6401d55ff4ecbd673513d36c83ee537bca2e72",
+      "bytes": 40517,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "database.html",
+      "sha256": "4b525928af3eb599ad6d2265500450b1bd4afb2cfa4761e1ddc468eeda254981",
+      "bytes": 424353,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "sample_of_reported_titles.html",
+      "sha256": "946f04cc9ca1ac44e04a077536268341511ec960c10b55bd119ac85e850b2a2b",
+      "bytes": 40353,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "scales_reference.html",
+      "sha256": "5eadd477c4ee44a865ed06da86226544ea1be457d4d3b07510a438263dbed528",
+      "bytes": 41569,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "occupation_data.html",
+      "sha256": "2518960b1794edd542f3d5f0468530e6d95599be7575c3e3967c1fe8d7ea4362",
+      "bytes": 42161,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "appendix_incumbent.html",
+      "sha256": "8ffb2d0a1478df28d3ed0eeafd02fbfe3b993706c03831ef15bb4bdbb340c470",
+      "bytes": 39429,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "content_model_reference.html",
+      "sha256": "94b6454f54499daf766f74bb7d3a29d257ab0e6d32a452f7cd4c02a8ce06947f",
+      "bytes": 44089,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "appendix_analyst.html",
+      "sha256": "4062d6665cef091180bea6254700d7eb4829a54273457c9d7872b1a0f21c0abd",
+      "bytes": 39021,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "occupation_level_metadata.html",
+      "sha256": "5f8c36d0ddf61e5de40311e2f078ff16dcaaa204f8e93ebce9e3429136b86143",
+      "bytes": 40971,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "survey_booklet_locations.html",
+      "sha256": "4863b9d61818cd8714c82cdae7921358316822402b6e06bb40c7f649f46cb104",
+      "bytes": 40826,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "essential_skills.html",
+      "sha256": "fcabdeac51461bebbf3f750d8b46937ce2dfe46df14e5b1ec8d4429c5f0e6c3e",
+      "bytes": 43795,
+      "role": "local source documentation evidence; excluded from public source payload"
+    },
+    {
+      "name": "work_context.html",
+      "sha256": "7c0ca1f00da176055e3d64b24b89b84a06e2c392b4eddd56046d364a11023b83",
+      "bytes": 44343,
+      "role": "local source documentation evidence; excluded from public source payload"
+    }
+  ],
+  "release_month": "2026-08"
+}

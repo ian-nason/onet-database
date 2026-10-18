@@ -1,0 +1,23 @@
+I reviewed the supplied closure payload only. Nothing was run and no hashes were recomputed.
+
+**Verdict.** All three review 04 items are closed as described. The closures introduce one new documentation conflict in the provenance file that should be decided before the card and file are uploaded. No local blocker remains for the artifact, ingestion or validation.
+
+## Closure checks
+
+- **Provenance file.** `sources-31.0.json` is supplied. Its build, source lock and runtime sections match `build-report.json`, `source-lock.json` and `runtime.json` from review 04 field for field, including the four build-input hashes. The `independent_review.scope` text at line 1372 accurately states that review 04 examined supplied files without execution, found no data or validation blocker, and asked for the card link and minor guard and README items. The card at `HF-README.md:62` now links a reviewed file and its 27-test statement matches `evidence/tests06/stderr.txt`. Closed.
+- **README durability.** Line 10 no longer disclaims a public URL and line 48 says the example opens the locally built artifact. Line 85 adds the guard tests. Closed.
+- **Kill race.** `run_guarded.py:11-19` catches `ProcessLookupError` on both signals and always reaps. The two mock fixtures at `test_guard.py:6-14` exercise each path with the right call counts. The tests06 receipt was produced by the new guard hash, and `closure-binding.json` records that the artifact build used the earlier guard hash, which matches `evidence/release-final-build/resources.json` from review 04. Closed.
+
+## New issue caused by the closure
+
+**Time-bound fields in a file that must be copied unchanged.** `sources-31.0.json:1374-1375` state `public_host_verified: false` and `publication_status: "prepared locally; not uploaded"`. Once this file is published unchanged, both statements will be false on the live dataset. Line 3 has the same shape through the copied build status. Fix, pick one: rename these to review-time facts, for example `status_at_independent_review`, so they stay true after upload; or allow exactly these fields to be updated at publication and record the change in the publication manifest, dropping the "copy unchanged" rule for them only. The scope text itself is time-invariant and needs no change.
+
+**Low, optional.** The same file publishes the local interpreter path under `/home/inason/...` at lines 1245 and 1268-1278, and the review session UUID at line 1367. Neither is a credential. If the repository owner prefers not to expose a local username path, replace it with a relative or redacted path before packaging; that would be a reviewed edit, not a drift.
+
+## Consistency observed
+
+`closure-binding.json` lists the five changed files and the unchanged review 04 set with their hashes. The guard hash for tests differs from the build receipt hash, as claimed. `CODEX-REVIEW.md` and `CLOSURE-FIXES.md` describe review 04 accurately.
+
+## Status
+
+No local blocker remains for requesting exact destination approval. The provenance-file wording should be settled before upload. Destination authorization and public-host verification of hash, range requests and both clients remain the external gates.

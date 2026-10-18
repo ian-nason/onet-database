@@ -1,0 +1,25 @@
+R R version 4.5.3 (2026-03-11) duckdb 1.5.5 datapond 0.1.0 
+CRAN driver constructor bounded by test harness; datapond functions unchanged.
+             title data_value standard_error
+1 Chief Executives       3.07         0.2851
+# A tibble: 3 × 16
+  onet_soc_code title       element_id element_name scale_id scale_name category
+  <chr>         <chr>       <chr>      <chr>        <chr>    <chr>         <int>
+1 11-1011.00    Chief Exec… 4.C.1.a.2… Public Spea… CX       Context          NA
+2 11-1011.00    Chief Exec… 4.C.1.a.2… Telephone C… CX       Context          NA
+3 11-1011.00    Chief Exec… 4.C.1.a.2… E-Mail       CX       Context          NA
+# ℹ 9 more variables: data_value <dbl>, n <int>, standard_error <dbl>,
+#   lower_ci_bound <dbl>, upper_ci_bound <dbl>, recommend_suppress <chr>,
+#   not_relevant <chr>, update_date <chr>, domain_source <chr>
+R localhost HTTP consumer PASS
+duckdb is storing downloaded extensions and secrets under ~/.duckdb:
+ℹ /home/inason/.duckdb
+This persists across sessions and is shared with the DuckDB CLI and other clients.
+ℹ Run duckdb(shared_home = FALSE) to use a temporary directory instead.
+ℹ See ?duckdb_storage for details and alternatives.
+duckdb is storing downloaded extensions and secrets under ~/.duckdb:
+ℹ /home/inason/.duckdb
+This persists across sessions and is shared with the DuckDB CLI and other clients.
+ℹ Run duckdb(shared_home = FALSE) to use a temporary directory instead.
+ℹ See ?duckdb_storage for details and alternatives.
+Ran 4/4 deferred expressions

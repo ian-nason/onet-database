@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "release_sha256": "b7908bb82e50d4aa0310a6400e2193e2b11946a9d663ff2c8f1171037585c11b",
+  "earlier_audited_candidate_sha256": "2819c2512b7f384c89f474a402ac7f992da675b4fcf5ac6131998cc760e0befd",
+  "typed_rows_nulls_samples_validation_identical": true,
+  "dictionary_byte_identical": true,
+  "all_cells_compared_before_checkpoint_and_after_readonly_reopen": true,
+  "only_database_byte_differences_expected": "_metadata build timestamps",
+  "guard_versions_differ": true,
+  "reason": "New release used the subsequently repaired supervisor; the actual ingestion script and source data identities are unchanged."
+}

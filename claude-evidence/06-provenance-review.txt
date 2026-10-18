@@ -1,0 +1,13 @@
+I compared the supplied file against the review 05 version. Nothing was executed.
+
+**Verdict.** The time-bound wording finding is closed. No local blocker remains.
+
+**What the fix does.** `sources-31.0.json:2-3` adds a top-level statement that every status and path under `evidence_snapshot` describes the recorded pre-publication snapshot, not the current hosting state, with the recording time. The fields that would have become false after upload now sit inside that frame: the build status at line 6, `public_host_verified` at line 1377 and `publication_status` at line 1378. Each reads as a historical fact once the top-level sentence is applied, so a byte-for-byte copy to the public payload will not assert anything untrue after upload.
+
+**Nested content.** The `evidence_snapshot` object matches the review 05 file field for field as far as a side-by-side read can establish: build report values and the four build-input hashes, source lock including `release_month`, runtime including the three helper-function resolutions and package inventory, and the `independent_review` block whose scope text still describes review 04 accurately. `PROVENANCE-FIX.md` states Codex verified identity by hash; that is a claim I cannot check, and the visual comparison found no difference.
+
+**Card consistency.** `HF-README.md:62` was not resupplied and is stated unchanged. Its description of the file still holds, and its statement that localhost checks do not establish public-host verification remains true before and after upload.
+
+**Not taken, acceptable.** Keeping the local interpreter path and session UUID was marked optional in review 05. Neither is a credential.
+
+**Status of findings across this session.** Review 02's eight, review 03's six, review 04's three and review 05's one are all closed with evidence in the supplied payloads. The artifact remains `b7908bb8…` at 11,284,480 bytes, unchanged since review 04. Remaining gates are external only: destination authorization for the GitHub repository, Hugging Face dataset and registry branch, then public-host verification of the remote hash, range requests and both clients, recorded as a separate receipt.

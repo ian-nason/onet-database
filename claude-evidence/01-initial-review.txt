@@ -1,0 +1,48 @@
+I reviewed the supplied payload only. Nothing was executed and no file outside the payload was inspected, so every "verified" statement below means internal consistency between supplied artifacts, not a rerun.
+
+**Verdict.** The candidate's data content is well supported and I found no ingestion, typing, decimal, null, grain, suppression or license defect. The evidence chain has two gaps that should be closed before requesting publication approval. Both are cheap. The public-host gates remain open as already stated.
+
+## Findings
+
+**F1. Medium. Guard evidence does not trace to the committed guard script.** `evidence/build02/resources.json` has keys `name`, `peak_group_rss_bytes_sampled` and `completed_utc`, and a command of `onet.py --output ...` with no interpreter. The supplied `run_guarded.py:35` writes `peak_process_group_rss_bytes_sampled`, no `name`, no `completed_utc`, and `onet.py` has no shebang so that command could not have been spawned by `run_guarded.py:12`. Either an earlier guard version produced the file or it was edited. Fix: rebuild into a new candidate directory under the committed script, rerun audit, examples and consumer probes against the new hash, and have the guard record its own SHA-256 and the full argv in the report.
+
+**F2. Medium. Dependency identity is asserted by hand, and the pin disagrees with the install.** `audit_release.py:40` writes the string `helper_matches_project_commit` as a literal, so `runtime.json:14` is a typed claim, not a computed comparison. `pyproject.toml:9` pins commit `ba9f7198` while `runtime.json:9` shows the installed commit is `cee5ea7e`. Fix: pin `pyproject.toml` to the installed commit, or compute the comparison by hashing the helper at the pinned commit and failing when it differs. Remove hand-typed text from machine-generated evidence.
+
+**F3. Medium. Consumer harness is machine-specific and the patched R client is not in the payload.** `consumer.R:3` hardcodes a `/mnt/c/Users/ignna/...` library path and `consumer_probe.py:56` hardcodes an Rscript path. The "patched 0.1.1" R client is referenced only by version string in `evidence/r-consumer-patched.txt:1`. Fix: take paths from arguments or environment, and record the patched client's commit or diff hash in `consumer-report.json`.
+
+**F4. Medium. Claimed evidence files are missing from the payload.** `validate_examples.py:16` writes `evidence/examples.json` and `consumer_probe.py:52` writes `evidence/python-consumer.txt`. Neither is supplied. README line 41's update-month spans and line 78's "example results are saved" therefore rest on claims here. Fix: include both files in the review set, or drop the unsupported spans from the README.
+
+**F5. Low. Stale partial download causes an unhelpful failure.** `onet.py:85` opens the partial file with `xb` and never removes it on error, so a second run raises `FileExistsError` instead of retrying. The lock's recorded `ETag` and `Last-Modified` at `source-lock.json:8` are never compared to the response. Fix: unlink a stale partial first, and fail when response headers differ from the lock.
+
+**F6. Low. Audit assertions are disabled under optimisation.** `audit_release.py:24,29,31,34` use bare `assert`, which `python -O` strips silently. Fix: raise `ValueError` with the label, as `checks()` does.
+
+**F7. Low. All-cell comparison runs before checkpoint only.** `onet.py:156` compares cells on the live connection; `onet.py:176` reopens the file and reruns `checks()` but not `audit_source()`. The persisted file's cells are never recompared. Fix: rerun `audit_source` on the read-only reopen, or recompute the typed fingerprints in `audit_release.py` and compare to `build-report.json`.
+
+**F8. Low. Small correctness and hygiene items.**
+- `onet.py:79` raises `KeyError`, not `ValueError`, for a missing ZIP member.
+- `onet.py:143` checks free disk after `mkdir`, leaving an empty directory that then blocks the retry at line 141.
+- `onet.py:162,180` hardcode `'31.0'` instead of reading `LOCK['release']`.
+- Percentage tolerance is 0.03 in `audit_release.py:9` but 0.05 in `validate_examples.py:12`. Pick one and document it.
+- `run_guarded.py:20` sums every file under the repository root, not the build's owned files, so "owned disk" is mislabelled.
+- `consumer_probe.py:20` returns 416 for an end beyond file size, where RFC 7233 clamps. Harmless for DuckDB, but it makes the loopback server stricter than real hosts, which is one more reason the public-host test is a gate.
+- `DICTIONARY.md:237` says "see below" but the codes are only in the README.
+- No tests cover `verify_archive` member size, duplicate names or inflated-size paths, or the `download` partial path.
+
+## What the payload actually supports
+
+Internally consistent across independent files, which I treat as evidence:
+- Row counts, null counts, null percentages in `DICTIONARY.md`, view counts asserted in `audit_release.py:35-37`, and README coverage figures all reconcile arithmetically. 57 elements times 911 occupations equals the 51,927 mean rows, and 281 category labels times 902 occupations equals the 253,462 percentage rows.
+- The lock's `ETag` hex suffix decodes to the pinned byte count and the `Last-Modified` weekday is correct for the date.
+- Dictionary snapshot hashes in `source-lock.json` match the `dictionary_sha256` values in `schema.json`.
+- The 19 tests listed in `evidence/tests02/stderr.txt` match the 19 test methods in `test_onet.py`.
+- The typed comparison design is fail-closed. Over-precision, blanks in required fields, bad months and non-numeric tokens raise rather than coerce. DuckDB rounding on cast cannot pass because the Python side rejects first.
+
+Claims I could not check: the member and archive SHA-256 values, the typed fingerprints, the official row counts, the source-code list at `audit_release.py:11`, and the README date spans.
+
+## Release blockers
+
+1. Regenerate guard evidence under the committed script and reconcile the helper pin. F1 and F2.
+2. Public-host verification of hash, range requests and both clients after upload. Already acknowledged.
+3. Destination and registry approvals. Already acknowledged.
+
+The local candidate is ready for a publication approval request once F1 and F2 are fixed and the evidence from F4 is attached. Nothing I found changes the data in the artifact.

@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "candidate_sha256": "2819c2512b7f384c89f474a402ac7f992da675b4fcf5ac6131998cc760e0befd",
+  "reproduction_sha256": "2616d454f7df9f82e360e9f6ba5e0cdff54103d38f3a25f83a9298b252ca92d5",
+  "all_typed_table_fingerprints_and_nulls_identical": true,
+  "dictionary_byte_identical": true,
+  "both_builds_recompare_all_cells_after_read_only_reopen": true,
+  "candidate_guard_sha256": "4dcaa7d1c150f55e4ba288e9ea653dc195f3816b036c85f450dad9e577aad241",
+  "reproduction_guard_sha256": "4dcaa7d1c150f55e4ba288e9ea653dc195f3816b036c85f450dad9e577aad241",
+  "byte_identity_expected": false,
+  "reason": "Metadata built_at differs between rebuilds."
+}

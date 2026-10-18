@@ -1,0 +1,14 @@
+# Six follow-up findings resolved
+
+This supplement follows the completed `03-followup` Claude review. Earlier reports, prompts, candidate artifacts and source commit `b98a8f4` remain preserved. The new release candidate is `releases/31.0-release-final/onet.duckdb`, SHA-256 `b7908bb82e50d4aa0310a6400e2193e2b11946a9d663ff2c8f1171037585c11b`, 11,284,480 bytes. The data and dictionary content match the earlier audited final candidate; metadata build time changes bytes.
+
+1. **Helper coverage:** `audit_release.py` resolves and hashes the source module of each imported helper function (`ensure_metadata`, `build_columns_table`, `export_dictionary`) and requires every hash to equal the pinned metadata implementation. The resulting mapping is in `runtime.json`; all three functions are in the same pinned module.
+2. **Environment inventory:** `runtime.json` now records the full package/version inventory and executable path. README explicitly identifies the existing FJC judges virtual environment. No new installation or clean-install test is claimed.
+3. **Negative fixture specificity:** missing-member, duplicate-member and member-size tests now use exact expected message patterns, so another ValueError cannot satisfy those tests. All 24 tests pass again.
+4. **Release-month bound:** `source-lock.json` explicitly pins `release_month` to `2026-08`. The audit validates that token and derives its upper date bound from the lock. The source ZIP and member hashes are unchanged.
+5. **Guard label:** the disk-limit stop reason now says `workspace files over 2 GiB`, consistent with the exact all-files-in-repository receipt scope. A new build under this guard records its hash and full argv.
+6. **Distribution coverage:** README now explicitly reports 911 occupations for means versus 902 for percentage distributions; nothing is imputed. The prepared Hugging Face card uses the same counts and a stable `/resolve/main/onet.duckdb` attach URL, with immutable commit URLs recommended for reproducibility.
+
+Codex also found a guard failure path: a filesystem telemetry exception could terminate the supervisor before stopping its worker. The guard now tolerates disappearing temporary files and stops the process group on any unexpected supervisor exception. A failing-telemetry fixture proves the worker is no longer running and the receipt records failure. There are now 25 passing tests, including that fixture.
+
+Codex reran full ingestion/persisted-cell validation, negative regressions, exact schema/dictionary/runtime checks, all examples and fresh-cache Python/R HTTP consumers against this release hash. The complete report and the exact public card are submitted for the final Claude review under Ian's explicit payload approval recorded at 13:38:41 UTC. No credentials, unrelated files or HTE data are included.

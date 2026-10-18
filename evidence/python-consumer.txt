@@ -1,0 +1,32 @@
+  content_model_reference           3,006 rows  Definitions of content-model elements, including hierarchy nodes beyond this subset.
+  essential_skills                 18,200 rows  Essential-skill importance and level ratings with uncertainty, flags and update month.
+  job_titles                       54,269 rows  Alternate job titles and original source codes; many titles per occupation.
+  level_scale_anchors                 483 rows  Illustrative descriptions for points on level scales; includes other O*NET domains.
+  occupation_data                   1,016 rows  O*NET-SOC 2019 occupation codes, titles and descriptions; one row per occupation.
+  occupation_level_metadata        32,280 rows  Collection modes, response rates and demographics; not population microdata.
+  sample_of_reported_titles         8,189 rows  Sample job titles reported by workers, with My Next Move display flag.
+  scales_reference                     33 rows  Scale labels and native minimum/maximum values; no cross-scale normalization.
+  survey_booklet_locations            211 rows  Survey question identifiers keyed by element and scale; includes other domains.
+  transferable_skills              45,500 rows  Transferable-skill importance and level ratings with uncertainty, flags and update month.
+  work_context                    305,389 rows  Work-context scale means and separate response-category percentages; never pool scales/categories.
+  work_context_categories             281 rows  Labels keyed by element, scale and category for work-context response distributions.
+  work_context (305,389 rows)
+
+  Column              Type            Nulls  Example                                   Join
+  ------------------  -------------  ------  ----------------------------------------  ----
+  onet_soc_code       VARCHAR          0.0%  11-1011.00                                Join occupation_data on the complete 10-character O*NET-SOC code; not a unique key in other tables.
+  title               VARCHAR          0.0%  Accountants and Auditors                  
+  element_id          VARCHAR          0.0%  4.C.1.a.2.c                               Join content_model_reference; hierarchy codes remain text.
+  element_name        VARCHAR          0.0%  Conflict Situations                       
+  scale_id            VARCHAR          0.0%  CT                                        Join scales_reference; retain scale in rating keys.
+  scale_name          VARCHAR          0.0%  Context                                   
+  category            INTEGER         17.0%  1                                         Nullable: mean rows have no category; category distributions join work_context_categories on element_id, scale_id AND category.
+  data_value          DECIMAL(18,2)    0.0%  0.00                                      Native scale rating or category percentage; not a worker-level observation.
+  n                   INTEGER          0.2%  10                                        
+  standard_error      DECIMAL(18,4)   27.6%  0.0000                                    
+  lower_ci_bound      DECIMAL(18,4)   41.7%  0.0003                                    
+  upper_ci_bound      DECIMAL(18,4)   41.7%  0.0148                                    
+  recommend_suppress  VARCHAR         27.5%  N                                         Y = low precision; retain source value but omit from substantive examples.
+  not_relevant        VARCHAR        100.0%                                            Y = not relevant; NULL is not an explicit N.
+  update_date         VARCHAR          0.0%  06/2006                                   Original MM/YYYY update month, not survey date, annual panel year or day-precision date.
+  domain_source       VARCHAR          0.0%  Analyst - Transition                      

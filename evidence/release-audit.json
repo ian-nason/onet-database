@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "artifact_sha256": "b7908bb82e50d4aa0310a6400e2193e2b11946a9d663ff2c8f1171037585c11b",
+  "aggregate_violations": {
+    "complete category groups": 0,
+    "category percentage rounding": 0,
+    "occupation code format": 0,
+    "job title source codes": 0,
+    "reported title flags": 0,
+    "skill scales": 0,
+    "rating domain sources": 0,
+    "occupation metadata percentages": 0,
+    "update month within release": 0
+  },
+  "all_schema_metadata_and_dictionary_fields_match": true,
+  "views_match_expected_grain": true
+}

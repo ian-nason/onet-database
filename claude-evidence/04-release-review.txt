@@ -1,0 +1,32 @@
+I reviewed the supplied payload only. Nothing was executed and no hashes were recomputed. "Consistent" below means agreement between independently produced files in the bundle.
+
+**Verdict.** The six prior low findings are resolved in code and receipts, not only in prose. The supervisor repair is sound and its fixture is listed as passing. No local blocker remains for the artifact, ingestion, validation or documentation. One item on the Hugging Face card should be closed before the card itself is uploaded, and two trivial items remain.
+
+## Reconciliation of the six prior lows
+
+- **Helper pin coverage.** `audit_release.py:47-51` resolves the source file of each of the three imported functions and requires each hash to equal the pin. `runtime.json` shows all three resolve to `metadata.py` with the pinned hash. Resolved.
+- **Build environment.** `runtime.json` records the interpreter and the full package inventory. README line 82 names the FJC judges virtual environment. Resolved.
+- **Fixture specificity.** `test_onet.py:93-94` matches exact messages for missing, duplicate and size variants. Resolved.
+- **Release-month bound.** `source-lock.json:118` pins `2026-08`. `audit_release.py:10-11` validates the token before it is interpolated at line 21, so no injection path. The build report's lock hash changed while the hashes of `onet.py`, `schema.json` and `pyproject.toml` did not, which matches a lock-only edit. Resolved.
+- **Guard label.** `run_guarded.py:37` now reads "workspace files over 2 GiB". Resolved.
+- **Distribution coverage.** README line 43 and the card at line 51 both state 911 occupations for means and 902 for distributions. Both numbers follow from the group diagnostics in `evidence/examples.json`. Resolved.
+
+## Supervisor repair
+
+`run_guarded.py:25-45` wraps the sampling loop and stops the process group on any supervisor exception. `test_guard.py` injects an `OSError` into `workspace_bytes`, asserts a nonzero exit, a terminated child and the recorded reason. The receipt format for `evidence/release-final-build/resources.json` matches `run_guarded.py:47` and its guard hash differs from the prior receipt, which agrees with `release-reproduction.json` stating the guard changed. Evidence is consistent.
+
+## Unresolved items
+
+- **Card references an unsupplied file.** `HF-README.md:62` links `sources-31.0.json` and says it contains source identities, build proof, runtime identity and "the independent review's scope". That file is not in the payload, so its contents, including any description of this review, are unreviewed. Fix: supply the file for review before uploading the card, or remove the clause describing the review's scope and let the card link only to files already reviewed.
+- **Low. Post-publication README edits.** README lines 10 and 48 say no public URL is claimed and that the local path should be replaced later. Both need updating in the same commit as publication.
+- **Low. Kill race in the guard.** `run_guarded.py:13` can raise `ProcessLookupError` if the worker exits between `poll` and `killpg`, which would abort the receipt. Fix: catch `ProcessLookupError` around the two `killpg` calls.
+
+## Card accuracy check
+
+Every number in `HF-README.md` matches the receipts: row counts per table, total rows, column count, byte size, both hashes, view row counts, occupation coverage, update-month spans and the 25-test count. The DuckDB attach syntax at lines 34-36 is valid. The reproduction claim at line 62 rests on `release-reproduction.json`, which compares this release to the earlier audited candidate built from the identical ingestion script. The card's statement about the scope of this review at line 64 is accurate.
+
+Claims I cannot check from here: all SHA-256 values, the helper-lock derivation, and the HTTP request log, which is identical across three artifacts. That identity is expected for same-size files with the same table layout.
+
+## Remaining gates
+
+Destination authorization and public-host verification of hash, range requests and both clients remain external and unchanged. Nothing local blocks requesting publication approval once the card's unsupplied file is either reviewed or dereferenced.

@@ -1,0 +1,18 @@
+{
+  "name": "tests05",
+  "command": [
+    "-m",
+    "unittest",
+    "-v",
+    "test_onet",
+    "test_guard"
+  ],
+  "exit_code": 0,
+  "stop_reason": null,
+  "elapsed_seconds": 0.511,
+  "peak_group_rss_bytes_sampled": 73523200,
+  "peak_owned_disk_bytes_sampled": 593073218,
+  "minimum_available_memory_bytes": 9686999040,
+  "sample_interval_seconds": 0.25,
+  "completed_utc": "2026-10-18T13:46:37.823982+00:00"
+}
