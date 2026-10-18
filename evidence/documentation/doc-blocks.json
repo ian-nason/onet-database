@@ -1,0 +1,42 @@
+[
+  {
+    "language": "sql",
+    "code": "SET memory_limit = '128MiB';\nSET threads = 1;\nSET max_temp_directory_size = '0B';\nINSTALL httpfs;\nLOAD httpfs;\nATTACH 'https://huggingface.co/datasets/Nason/onet-database/resolve/d0e84bacef02d4477423edbf7468cc3ec8fb79c2/onet.duckdb' AS onet (READ_ONLY);\n\n-- Occupations with the highest mean reported exposure to disease or infection\nSELECT onet_soc_code, title, data_value AS mean_exposure, lower_ci_bound, upper_ci_bound, n, update_date\nFROM onet.v_work_context_means\nWHERE element_id = '4.C.2.c.1.b' AND scale_id = 'CX' AND recommend_suppress = 'N'\nORDER BY data_value DESC, onet_soc_code\nLIMIT 15;"
+  },
+  {
+    "language": "python",
+    "code": "import duckdb\ncon = duckdb.connect(config={\"memory_limit\": \"128MiB\", \"threads\": \"1\", \"max_temp_directory_size\": \"0B\"})\ncon.sql(\"INSTALL httpfs; LOAD httpfs;\")\ncon.sql(\"ATTACH 'https://huggingface.co/datasets/Nason/onet-database/resolve/d0e84bacef02d4477423edbf7468cc3ec8fb79c2/onet.duckdb' AS onet (READ_ONLY)\")\ncon.sql(\"SELECT * FROM onet._metadata\").show()\ncon.sql(\"\"\"\n    SELECT skill_domain, element_name, data_value AS importance, lower_ci_bound, upper_ci_bound\n    FROM onet.v_skills\n    WHERE onet_soc_code = '29-1141.00' AND scale_id = 'IM' AND recommend_suppress = 'N'\n    ORDER BY data_value DESC, element_id LIMIT 10\n\"\"\").show()\ncon.close()"
+  },
+  {
+    "language": "r",
+    "code": "library(DBI)\ncon <- dbConnect(duckdb::duckdb(config = list(memory_limit = \"128MiB\", threads = \"1\", max_temp_directory_size = \"0B\")))\ndbExecute(con, \"INSTALL httpfs\")\ndbExecute(con, \"LOAD httpfs\")\ndbExecute(con, \"ATTACH 'https://huggingface.co/datasets/Nason/onet-database/resolve/d0e84bacef02d4477423edbf7468cc3ec8fb79c2/onet.duckdb' AS onet (READ_ONLY)\")\ndbGetQuery(con, \"SELECT onet_soc_code, title FROM onet.occupation_data ORDER BY onet_soc_code LIMIT 5\")\ndbDisconnect(con, shutdown = TRUE)"
+  },
+  {
+    "language": "python",
+    "code": "import datapond\nprint(datapond.list())\ndatapond.describe('onet', table='work_context')\ncon = datapond.connect('onet')\ncon.sql('SELECT onet_soc_code, title FROM occupation_data ORDER BY onet_soc_code LIMIT 5').show()\ncon.close()"
+  },
+  {
+    "language": "r",
+    "code": "library(datapond)\ndp_list()\ncon <- dp_connect('onet')\ndp_describe(con, table = 'work_context')\nDBI::dbGetQuery(con, \"SELECT onet_soc_code, title FROM occupation_data ORDER BY onet_soc_code LIMIT 5\")\ndp_disconnect(con)"
+  },
+  {
+    "language": "python",
+    "code": "import datapond\ndatapond.download('onet')\ncon = datapond.connect('onet', local=True)\ncon.sql('SELECT onet_soc_code, title FROM occupation_data ORDER BY onet_soc_code LIMIT 5').show()\ncon.close()"
+  },
+  {
+    "language": "r",
+    "code": "library(datapond)\ndp_download('onet')\ncon <- dp_connect('onet', local = TRUE)\nDBI::dbGetQuery(con, \"SELECT onet_soc_code, title FROM occupation_data ORDER BY onet_soc_code LIMIT 5\")\ndp_disconnect(con)"
+  },
+  {
+    "language": "sql",
+    "code": "SELECT element_name, data_value, n, standard_error, recommend_suppress, update_date\nFROM onet.v_work_context_means\nWHERE onet_soc_code = '29-1141.00' AND scale_id = 'CX'\n  AND element_id IN ('4.C.2.d.1.b', '4.C.2.d.1.d', '4.C.2.d.1.h')\nORDER BY element_id;"
+  },
+  {
+    "language": "sql",
+    "code": "SELECT category, category_description, data_value AS response_percent, recommend_suppress, update_date\nFROM onet.v_work_context_percentages\nWHERE onet_soc_code = '29-1141.00' AND element_id = '4.C.2.d.1.b' AND scale_id = 'CXP'\nORDER BY category;"
+  },
+  {
+    "language": "sql",
+    "code": "WITH skill AS (\n  SELECT onet_soc_code, title, data_value AS social_perceptiveness_importance\n  FROM onet.transferable_skills\n  WHERE element_id = '2.B.1.a' AND scale_id = 'IM' AND recommend_suppress = 'N'\n), exposure AS (\n  SELECT onet_soc_code, data_value AS disease_exposure\n  FROM onet.v_work_context_means\n  WHERE element_id = '4.C.2.c.1.b' AND scale_id = 'CX' AND recommend_suppress = 'N'\n)\nSELECT * FROM skill JOIN exposure USING (onet_soc_code)\nORDER BY disease_exposure DESC, onet_soc_code LIMIT 20;"
+  }
+]

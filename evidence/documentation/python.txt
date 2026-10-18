@@ -1,0 +1,107 @@
+SQL BLOCK 0 rows 15 first ('29-1216.00', 'General Internal Medicine Physicians', Decimal('5.00'), None, None, 22, '08/2021')
+
+DOC BLOCK 1 python
+┌───────────────────────────┬──────────────────────────────────┬───────────┬───┬──────────────────────┬────────────────┐
+│        table_name         │           description            │ row_count │ … │    source_sha256     │ source_release │
+│          varchar          │             varchar              │   int64   │ … │       varchar        │    varchar     │
+├───────────────────────────┼──────────────────────────────────┼───────────┼───┼──────────────────────┼────────────────┤
+│ occupation_data           │ O*NET-SOC 2019 occupation codes… │      1016 │ … │ a09eae1d6609686e44e… │ 31.0           │
+│ job_titles                │ Alternate job titles and origin… │     54269 │ … │ 75a3b46d6edc5996117… │ 31.0           │
+│ sample_of_reported_titles │ Sample job titles reported by w… │      8189 │ … │ 5d76040b7b0602ea217… │ 31.0           │
+│ essential_skills          │ Essential-skill importance and … │     18200 │ … │ 68c4d31d8c550772383… │ 31.0           │
+│ transferable_skills       │ Transferable-skill importance a… │     45500 │ … │ f17d0419e818a3bf2f5… │ 31.0           │
+│ work_context              │ Work-context scale means and se… │    305389 │ … │ 599f6bff23cbc3e7d89… │ 31.0           │
+│ content_model_reference   │ Definitions of content-model el… │      3006 │ … │ 370033744006dbd5df0… │ 31.0           │
+│ scales_reference          │ Scale labels and native minimum… │        33 │ … │ bcba23858ce21ecaacb… │ 31.0           │
+│ level_scale_anchors       │ Illustrative descriptions for p… │       483 │ … │ 7205657fb54280827d6… │ 31.0           │
+│ work_context_categories   │ Labels keyed by element, scale … │       281 │ … │ 1a6ca4b051a94aad61b… │ 31.0           │
+│ occupation_level_metadata │ Collection modes, response rate… │     32280 │ … │ 91b939ab752663ab727… │ 31.0           │
+│ survey_booklet_locations  │ Survey question identifiers key… │       211 │ … │ 13e36d83dcab3cc8a43… │ 31.0           │
+└───────────────────────────┴──────────────────────────────────┴───────────┴───┴──────────────────────┴────────────────┘
+  12 rows                                                                                         10 columns (5 shown)
+
+┌──────────────┬──────────────────────────────┬───────────────┬────────────────┬────────────────┐
+│ skill_domain │         element_name         │  importance   │ lower_ci_bound │ upper_ci_bound │
+│   varchar    │           varchar            │ decimal(18,2) │ decimal(18,4)  │ decimal(18,4)  │
+├──────────────┼──────────────────────────────┼───────────────┼────────────────┼────────────────┤
+│ transferable │ Social Perceptiveness        │          4.12 │         3.8800 │         4.3700 │
+│ essential    │ Active Listening             │          4.00 │         4.0000 │         4.0000 │
+│ essential    │ Speaking                     │          4.00 │         4.0000 │         4.0000 │
+│ essential    │ Critical Thinking            │          4.00 │         4.0000 │         4.0000 │
+│ transferable │ Coordination                 │          4.00 │         4.0000 │         4.0000 │
+│ transferable │ Service Orientation          │          4.00 │         4.0000 │         4.0000 │
+│ essential    │ Reading Comprehension        │          3.88 │         3.6300 │         4.1200 │
+│ transferable │ Judgment and Decision Making │          3.88 │         3.6300 │         4.1200 │
+│ essential    │ Writing                      │          3.75 │         3.4292 │         4.0708 │
+│ essential    │ Monitoring                   │          3.75 │         3.4292 │         4.0708 │
+└──────────────┴──────────────────────────────┴───────────────┴────────────────┴────────────────┘
+  10 rows                                                                             5 columns
+
+
+DOC BLOCK 3 python
+['eoir', 'ice', 'fec', 'clinicaltrials', 'cms-medicare', 'openpayments', 'dol-visas', 'ipeds-db', 'fjc', 'cbp', 'ussc', 'cook-sao', 'fjc-judges', 'scdb', 'open-policing', 'courtlistener', 'onet', 'qcew', 'fars']
+  work_context (305,389 rows)
+
+  Column              Type            Nulls  Example                                   Join
+  ------------------  -------------  ------  ----------------------------------------  ----
+  onet_soc_code       VARCHAR          0.0%  11-1011.00                                Join occupation_data on the complete 10-character O*NET-SOC code; not a unique key in other tables.
+  title               VARCHAR          0.0%  Accountants and Auditors                  
+  element_id          VARCHAR          0.0%  4.C.1.a.2.c                               Join content_model_reference; hierarchy codes remain text.
+  element_name        VARCHAR          0.0%  Conflict Situations                       
+  scale_id            VARCHAR          0.0%  CT                                        Join scales_reference; retain scale in rating keys.
+  scale_name          VARCHAR          0.0%  Context                                   
+  category            INTEGER         17.0%  1                                         Nullable: mean rows have no category; category distributions join work_context_categories on element_id, scale_id AND category.
+  data_value          DECIMAL(18,2)    0.0%  0.00                                      Native scale rating or category percentage; not a worker-level observation.
+  n                   INTEGER          0.2%  10                                        
+  standard_error      DECIMAL(18,4)   27.6%  0.0000                                    
+  lower_ci_bound      DECIMAL(18,4)   41.7%  0.0003                                    
+  upper_ci_bound      DECIMAL(18,4)   41.7%  0.0148                                    
+  recommend_suppress  VARCHAR         27.5%  N                                         Y = low precision; retain source value but omit from substantive examples.
+  not_relevant        VARCHAR        100.0%                                            Y = not relevant; NULL is not an explicit N.
+  update_date         VARCHAR          0.0%  06/2006                                   Original MM/YYYY update month, not survey date, annual panel year or day-precision date.
+  domain_source       VARCHAR          0.0%  Analyst - Transition                      
+Connecting to O*NET 31.0 Occupations, Skills and Work Context (0.011284 GB remote)...
+Connected. 17 tables available.
+┌───────────────┬─────────────────────────────────────┐
+│ onet_soc_code │                title                │
+│    varchar    │               varchar               │
+├───────────────┼─────────────────────────────────────┤
+│ 11-1011.00    │ Chief Executives                    │
+│ 11-1011.03    │ Chief Sustainability Officers       │
+│ 11-1021.00    │ General and Operations Managers     │
+│ 11-1031.00    │ Legislators                         │
+│ 11-2011.00    │ Advertising and Promotions Managers │
+└───────────────┴─────────────────────────────────────┘
+
+
+DOC BLOCK 5 python
+Downloading O*NET 31.0 Occupations, Skills and Work Context (0.011284 GB)...
+  onet: 0%
+  onet: 10%
+  onet: 20%
+  onet: 30%
+  onet: 40%
+  onet: 50%
+  onet: 60%
+  onet: 70%
+  onet: 80%
+  onet: 90%
+  onet: 100%
+  onet: complete (10.8 MB)
+Saved to /home/inason/datapond-maintenance/additions-2026-10-18/documentation-2026-10-18/qa/onet/attempt03/python-home/.datapond/onet.duckdb
+Connecting to O*NET 31.0 Occupations, Skills and Work Context (local)...
+Connected. 17 tables available.
+┌───────────────┬─────────────────────────────────────┐
+│ onet_soc_code │                title                │
+│    varchar    │               varchar               │
+├───────────────┼─────────────────────────────────────┤
+│ 11-1011.00    │ Chief Executives                    │
+│ 11-1011.03    │ Chief Sustainability Officers       │
+│ 11-1021.00    │ General and Operations Managers     │
+│ 11-1031.00    │ Legislators                         │
+│ 11-2011.00    │ Advertising and Promotions Managers │
+└───────────────┴─────────────────────────────────────┘
+
+SQL BLOCK 7 rows 3 first ('Spend Time Standing', Decimal('3.01'), 34, Decimal('0.4568'), 'N', '08/2021')
+SQL BLOCK 8 rows 5 first (1, 'Never', Decimal('0.00'), 'N', '08/2021')
+SQL BLOCK 9 rows 20 first ('29-1216.00', 'General Internal Medicine Physicians', Decimal('4.00'), Decimal('5.00'))

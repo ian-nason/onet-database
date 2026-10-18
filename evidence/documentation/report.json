@@ -1,0 +1,1318 @@
+{
+  "dataset": "onet",
+  "utc": "2026-10-18T16:37:52.715211+00:00",
+  "status": "passed",
+  "python": {
+    "executable": "/home/inason/datapond-maintenance/.venv-datapond/bin/python",
+    "version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "datapond_version": "0.1.1",
+    "module_path": "/home/inason/datapond-maintenance/.venv-datapond/lib/python3.12/site-packages/datapond/__init__.py",
+    "package_files_sha256": {
+      "__init__.py": "c086c414b3f8509f658fd500ffdab416fcacf91695167d9b30a7b61451b7aefe",
+      "cli.py": "6b2ed419a56d542d53746d067b95bb7d31993c7d721baaa5865ce5d2e249ef3f",
+      "connection.py": "ce66fb2275df2508ea39de9465cf45be5492613d6b88316a70c3ea92d110102a",
+      "describe.py": "f864342f4605968967cb94205b33a5f943b8accfa13d6e60fe675db8f168878a",
+      "download.py": "e092afee664b616bbd6397b4f457b4b0a8f9fe0ed46d6cc7d405685e4355a1b2",
+      "registry.py": "6fb32b8c5a1a3fc6020d5315d9c647c2a8f331fb4f0de074901788fbee2d61e1"
+    },
+    "duckdb_version": "1.5.4",
+    "download_sha256": "b7908bb82e50d4aa0310a6400e2193e2b11946a9d663ff2c8f1171037585c11b"
+  },
+  "r": {
+    "cran": {
+      "version": "0.1.0",
+      "library": "/mnt/c/Users/ignna/Documents/Codex/2026-10-17/task-2/libraries/cran/datapond",
+      "files_sha256": {
+        "DESCRIPTION": "c6be4a8a88f6eda1fbcf9c7dcb057c80c72eec8103ddc8f71a31c2df8c117800",
+        "INDEX": "a436399fc6a2967b3a8f2f61309d23679c30d613112402e5e1f24c459f9fd01e",
+        "LICENSE": "19c4566c98cc428077ff2a0c8306c4fd3b7262e5032cab5261b29b3ab50d5144",
+        "Meta/Rd.rds": "80ab8b7125a69b67dd9e9af3e10056977c1de7734524bfe4294c6c0960a57eb9",
+        "Meta/features.rds": "3d0dc41bc2f8db966da9c2b0e2a291e6137e628e676f88a64a127d73b459b93e",
+        "Meta/hsearch.rds": "f095ef8abadd071b2dc283b1a8d9b3f0156d501d5525dd4ea1fbf156d71ab06d",
+        "Meta/links.rds": "bf90953ba50a26d3233303e466226273cc095186d1d5e35d16875c5ad1787d20",
+        "Meta/nsInfo.rds": "edf70be297cd1c0fab37c01b53612a4c558a584ac8199aa4f461c32c65a33406",
+        "Meta/package.rds": "3ede01ba288b6b55c160b7a71890f1e11a4dbada4e2a8ce2638e122f3a82b9a7",
+        "Meta/vignette.rds": "5ea3b913eb6299b4e9ce463255ac30f08b3ae1098826ad8b699626fa04c706f6",
+        "NAMESPACE": "2b34b9a1928b532268a713f2aa5b293d694bf4dfd34e93312bf76a22c84c30f9",
+        "NEWS.md": "950b8aaf81e245d1aa898157346e470f156d0fcc9c08fba9a0f651aebdb77b55",
+        "R/datapond": "570ca456b280cdeb201ef5ebdf22dc8f80092e2c0c68e33c7f73340e420f3759",
+        "R/datapond.rdb": "5355bf813373cdabb238756187ba23f9a3bba4e892687e33375bf5339c0c45e1",
+        "R/datapond.rdx": "c7961225524caf58c8d4e0120ca79246cdf262ce6043b6f8cc325952f09c4e52",
+        "WORDLIST": "55db6e05b58eb30d29f606bf0d943d467eb6a405aebfc17038d23215b59719b4",
+        "doc/datapond.R": "b1a21a6fd3f2f0cc390144a530a41f90afc275d4c301ef6707fb6a3d8c45cefb",
+        "doc/datapond.Rmd": "176cc6cd700b3efa0c10e5197b9dba54fdd35b6b8b30467340cc70c44b7f44e9",
+        "doc/datapond.html": "df0e03013fc6599cd146b2ce800603fa611f17f32b41c675ae97306acfe35199",
+        "doc/index.html": "870c658cefad3c8cfd2508141669fa69c42095004caf1409e2e451abccbd39f9",
+        "help/AnIndex": "4422615141ac6939b966b886aca2f81bece192f24c9afde7f63a5656f273a890",
+        "help/aliases.rds": "3c03a4636ba9325f02caead03dcc219a1050e21725f0b6f4625d63fff6f62656",
+        "help/datapond.rdb": "5e844b91c1e158ea8196978e635fdcf17b7405be4452b6fb3ad8e51866ce9d76",
+        "help/datapond.rdx": "b49ec0bb232a9bf555aa785507520be18604c6b280c8be6506f6b2a7347b6d19",
+        "help/paths.rds": "f4bf897947ff300d1b067a56f7fa406725cc8ee410c8366e6fc68e73f09fb636",
+        "html/00Index.html": "9bf61c91f9738711cb73c901ef7a1c1808dda62137dd2801b018ad1df5a6656b",
+        "html/R.css": "52144cf4c349f7f2cf131342f81bbc43c6514ba2274556815df88918fdeb189b"
+      },
+      "download_sha256": "b7908bb82e50d4aa0310a6400e2193e2b11946a9d663ff2c8f1171037585c11b",
+      "status": "passed"
+    },
+    "patched": {
+      "version": "0.1.1",
+      "library": "/mnt/c/Users/ignna/Documents/Codex/2026-10-17/task-2/libraries/patched/datapond",
+      "files_sha256": {
+        "DESCRIPTION": "236878b062c25b025cfcf188d0908b4645db8a94e0215da9d695971fda91c61d",
+        "INDEX": "88b0ab6bad98d39c97cf926f027c342d6b712200ff6464cf9f88a16881159cb0",
+        "LICENSE": "19c4566c98cc428077ff2a0c8306c4fd3b7262e5032cab5261b29b3ab50d5144",
+        "Meta/Rd.rds": "ad529c9e8702435a0b60800d1e0e9cf42d7f6dca06086ea1ccfd7690df370019",
+        "Meta/features.rds": "3d0dc41bc2f8db966da9c2b0e2a291e6137e628e676f88a64a127d73b459b93e",
+        "Meta/hsearch.rds": "b7b23cfdef7dc6e4061b02853088acbc322943bf004d3e6ac0308e41be2622ab",
+        "Meta/links.rds": "bf90953ba50a26d3233303e466226273cc095186d1d5e35d16875c5ad1787d20",
+        "Meta/nsInfo.rds": "edf70be297cd1c0fab37c01b53612a4c558a584ac8199aa4f461c32c65a33406",
+        "Meta/package.rds": "d88e9042215486569cd64bf04fa1b05c39169f2deb2300deae47b83abb47047c",
+        "Meta/vignette.rds": "5ea3b913eb6299b4e9ce463255ac30f08b3ae1098826ad8b699626fa04c706f6",
+        "NAMESPACE": "2b34b9a1928b532268a713f2aa5b293d694bf4dfd34e93312bf76a22c84c30f9",
+        "NEWS.md": "4be1b78818d2980719e0d404d22f6c4f228a24e3e5900103230ef6ef1b84d660",
+        "R/datapond": "570ca456b280cdeb201ef5ebdf22dc8f80092e2c0c68e33c7f73340e420f3759",
+        "R/datapond.rdb": "1d68d1ce062ec8697d1f391a753b9534635932ec5bb59fb692413d9b897a9f10",
+        "R/datapond.rdx": "f3da9e79f80fb13cdf39714ef3ab6a3e40078a44b2010c4a76abeb68700a5baa",
+        "WORDLIST": "55db6e05b58eb30d29f606bf0d943d467eb6a405aebfc17038d23215b59719b4",
+        "doc/datapond.R": "4bf881be8f3353a3ee2f7aa4537ae197e7fac1a58fa97d77a79c8ab340f4c91c",
+        "doc/datapond.Rmd": "3150ba1281868a0a3bc0830a11945095ab8b148120934c7e8a35c8393881fbb3",
+        "doc/datapond.html": "7fa3ca39f697f79df38e39cb54f9028d46725217808f314a18e49e38b7cb11d8",
+        "doc/index.html": "870c658cefad3c8cfd2508141669fa69c42095004caf1409e2e451abccbd39f9",
+        "help/AnIndex": "4422615141ac6939b966b886aca2f81bece192f24c9afde7f63a5656f273a890",
+        "help/aliases.rds": "3c03a4636ba9325f02caead03dcc219a1050e21725f0b6f4625d63fff6f62656",
+        "help/datapond.rdb": "bea5c70616c6113ee861ca21814dbebea614019091d27592e5d4262ccee11236",
+        "help/datapond.rdx": "c74190c0b083ded7cad542c5944292a648b375d2ea244e4c3f4532496a75fa25",
+        "help/paths.rds": "197785819eaa6edb60c75b6f3cdfecd222cbaaa14db88165e7398f343bf4c9fb",
+        "html/00Index.html": "c387e6cf3ab54de94599e909347742d86b2d0538e2e785bee98c0303ecde0ab1",
+        "html/R.css": "52144cf4c349f7f2cf131342f81bbc43c6514ba2274556815df88918fdeb189b"
+      },
+      "download_sha256": "b7908bb82e50d4aa0310a6400e2193e2b11946a9d663ff2c8f1171037585c11b",
+      "status": "passed"
+    }
+  },
+  "metadata_totals": [
+    12,
+    468857,
+    89
+  ],
+  "schema": [
+    [
+      "_columns",
+      "table_name",
+      "VARCHAR"
+    ],
+    [
+      "_columns",
+      "column_name",
+      "VARCHAR"
+    ],
+    [
+      "_columns",
+      "data_type",
+      "VARCHAR"
+    ],
+    [
+      "_columns",
+      "source_file",
+      "VARCHAR"
+    ],
+    [
+      "_columns",
+      "example_value",
+      "VARCHAR"
+    ],
+    [
+      "_columns",
+      "join_hint",
+      "VARCHAR"
+    ],
+    [
+      "_columns",
+      "null_pct",
+      "DOUBLE"
+    ],
+    [
+      "_columns",
+      "description",
+      "VARCHAR"
+    ],
+    [
+      "_columns",
+      "source_header",
+      "VARCHAR"
+    ],
+    [
+      "_metadata",
+      "table_name",
+      "VARCHAR"
+    ],
+    [
+      "_metadata",
+      "description",
+      "VARCHAR"
+    ],
+    [
+      "_metadata",
+      "row_count",
+      "BIGINT"
+    ],
+    [
+      "_metadata",
+      "column_count",
+      "INTEGER"
+    ],
+    [
+      "_metadata",
+      "source_url",
+      "VARCHAR"
+    ],
+    [
+      "_metadata",
+      "license",
+      "VARCHAR"
+    ],
+    [
+      "_metadata",
+      "built_at",
+      "TIMESTAMP"
+    ],
+    [
+      "_metadata",
+      "source_file",
+      "VARCHAR"
+    ],
+    [
+      "_metadata",
+      "source_sha256",
+      "VARCHAR"
+    ],
+    [
+      "_metadata",
+      "source_release",
+      "VARCHAR"
+    ],
+    [
+      "content_model_reference",
+      "element_id",
+      "VARCHAR"
+    ],
+    [
+      "content_model_reference",
+      "element_name",
+      "VARCHAR"
+    ],
+    [
+      "content_model_reference",
+      "description",
+      "VARCHAR"
+    ],
+    [
+      "essential_skills",
+      "onet_soc_code",
+      "VARCHAR"
+    ],
+    [
+      "essential_skills",
+      "title",
+      "VARCHAR"
+    ],
+    [
+      "essential_skills",
+      "element_id",
+      "VARCHAR"
+    ],
+    [
+      "essential_skills",
+      "element_name",
+      "VARCHAR"
+    ],
+    [
+      "essential_skills",
+      "scale_id",
+      "VARCHAR"
+    ],
+    [
+      "essential_skills",
+      "scale_name",
+      "VARCHAR"
+    ],
+    [
+      "essential_skills",
+      "data_value",
+      "DECIMAL(18,2)"
+    ],
+    [
+      "essential_skills",
+      "n",
+      "INTEGER"
+    ],
+    [
+      "essential_skills",
+      "standard_error",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "essential_skills",
+      "lower_ci_bound",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "essential_skills",
+      "upper_ci_bound",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "essential_skills",
+      "recommend_suppress",
+      "VARCHAR"
+    ],
+    [
+      "essential_skills",
+      "not_relevant",
+      "VARCHAR"
+    ],
+    [
+      "essential_skills",
+      "update_date",
+      "VARCHAR"
+    ],
+    [
+      "essential_skills",
+      "domain_source",
+      "VARCHAR"
+    ],
+    [
+      "job_titles",
+      "onet_soc_code",
+      "VARCHAR"
+    ],
+    [
+      "job_titles",
+      "title",
+      "VARCHAR"
+    ],
+    [
+      "job_titles",
+      "job_title",
+      "VARCHAR"
+    ],
+    [
+      "job_titles",
+      "short_title",
+      "VARCHAR"
+    ],
+    [
+      "job_titles",
+      "sources",
+      "VARCHAR"
+    ],
+    [
+      "level_scale_anchors",
+      "element_id",
+      "VARCHAR"
+    ],
+    [
+      "level_scale_anchors",
+      "element_name",
+      "VARCHAR"
+    ],
+    [
+      "level_scale_anchors",
+      "scale_id",
+      "VARCHAR"
+    ],
+    [
+      "level_scale_anchors",
+      "scale_name",
+      "VARCHAR"
+    ],
+    [
+      "level_scale_anchors",
+      "anchor_value",
+      "INTEGER"
+    ],
+    [
+      "level_scale_anchors",
+      "anchor_description",
+      "VARCHAR"
+    ],
+    [
+      "occupation_data",
+      "onet_soc_code",
+      "VARCHAR"
+    ],
+    [
+      "occupation_data",
+      "title",
+      "VARCHAR"
+    ],
+    [
+      "occupation_data",
+      "description",
+      "VARCHAR"
+    ],
+    [
+      "occupation_level_metadata",
+      "onet_soc_code",
+      "VARCHAR"
+    ],
+    [
+      "occupation_level_metadata",
+      "title",
+      "VARCHAR"
+    ],
+    [
+      "occupation_level_metadata",
+      "item",
+      "VARCHAR"
+    ],
+    [
+      "occupation_level_metadata",
+      "response",
+      "VARCHAR"
+    ],
+    [
+      "occupation_level_metadata",
+      "n",
+      "INTEGER"
+    ],
+    [
+      "occupation_level_metadata",
+      "percent",
+      "DECIMAL(18,1)"
+    ],
+    [
+      "occupation_level_metadata",
+      "update_date",
+      "VARCHAR"
+    ],
+    [
+      "sample_of_reported_titles",
+      "onet_soc_code",
+      "VARCHAR"
+    ],
+    [
+      "sample_of_reported_titles",
+      "title",
+      "VARCHAR"
+    ],
+    [
+      "sample_of_reported_titles",
+      "reported_job_title",
+      "VARCHAR"
+    ],
+    [
+      "sample_of_reported_titles",
+      "shown_in_my_next_move",
+      "VARCHAR"
+    ],
+    [
+      "scales_reference",
+      "scale_id",
+      "VARCHAR"
+    ],
+    [
+      "scales_reference",
+      "scale_name",
+      "VARCHAR"
+    ],
+    [
+      "scales_reference",
+      "minimum",
+      "INTEGER"
+    ],
+    [
+      "scales_reference",
+      "maximum",
+      "INTEGER"
+    ],
+    [
+      "survey_booklet_locations",
+      "element_id",
+      "VARCHAR"
+    ],
+    [
+      "survey_booklet_locations",
+      "element_name",
+      "VARCHAR"
+    ],
+    [
+      "survey_booklet_locations",
+      "survey_item_number",
+      "VARCHAR"
+    ],
+    [
+      "survey_booklet_locations",
+      "scale_id",
+      "VARCHAR"
+    ],
+    [
+      "survey_booklet_locations",
+      "scale_name",
+      "VARCHAR"
+    ],
+    [
+      "transferable_skills",
+      "onet_soc_code",
+      "VARCHAR"
+    ],
+    [
+      "transferable_skills",
+      "title",
+      "VARCHAR"
+    ],
+    [
+      "transferable_skills",
+      "element_id",
+      "VARCHAR"
+    ],
+    [
+      "transferable_skills",
+      "element_name",
+      "VARCHAR"
+    ],
+    [
+      "transferable_skills",
+      "scale_id",
+      "VARCHAR"
+    ],
+    [
+      "transferable_skills",
+      "scale_name",
+      "VARCHAR"
+    ],
+    [
+      "transferable_skills",
+      "data_value",
+      "DECIMAL(18,2)"
+    ],
+    [
+      "transferable_skills",
+      "n",
+      "INTEGER"
+    ],
+    [
+      "transferable_skills",
+      "standard_error",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "transferable_skills",
+      "lower_ci_bound",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "transferable_skills",
+      "upper_ci_bound",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "transferable_skills",
+      "recommend_suppress",
+      "VARCHAR"
+    ],
+    [
+      "transferable_skills",
+      "not_relevant",
+      "VARCHAR"
+    ],
+    [
+      "transferable_skills",
+      "update_date",
+      "VARCHAR"
+    ],
+    [
+      "transferable_skills",
+      "domain_source",
+      "VARCHAR"
+    ],
+    [
+      "v_skills",
+      "skill_domain",
+      "VARCHAR"
+    ],
+    [
+      "v_skills",
+      "onet_soc_code",
+      "VARCHAR"
+    ],
+    [
+      "v_skills",
+      "title",
+      "VARCHAR"
+    ],
+    [
+      "v_skills",
+      "element_id",
+      "VARCHAR"
+    ],
+    [
+      "v_skills",
+      "element_name",
+      "VARCHAR"
+    ],
+    [
+      "v_skills",
+      "scale_id",
+      "VARCHAR"
+    ],
+    [
+      "v_skills",
+      "scale_name",
+      "VARCHAR"
+    ],
+    [
+      "v_skills",
+      "data_value",
+      "DECIMAL(18,2)"
+    ],
+    [
+      "v_skills",
+      "n",
+      "INTEGER"
+    ],
+    [
+      "v_skills",
+      "standard_error",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "v_skills",
+      "lower_ci_bound",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "v_skills",
+      "upper_ci_bound",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "v_skills",
+      "recommend_suppress",
+      "VARCHAR"
+    ],
+    [
+      "v_skills",
+      "not_relevant",
+      "VARCHAR"
+    ],
+    [
+      "v_skills",
+      "update_date",
+      "VARCHAR"
+    ],
+    [
+      "v_skills",
+      "domain_source",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_means",
+      "onet_soc_code",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_means",
+      "title",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_means",
+      "element_id",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_means",
+      "element_name",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_means",
+      "scale_id",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_means",
+      "scale_name",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_means",
+      "category",
+      "INTEGER"
+    ],
+    [
+      "v_work_context_means",
+      "data_value",
+      "DECIMAL(18,2)"
+    ],
+    [
+      "v_work_context_means",
+      "n",
+      "INTEGER"
+    ],
+    [
+      "v_work_context_means",
+      "standard_error",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "v_work_context_means",
+      "lower_ci_bound",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "v_work_context_means",
+      "upper_ci_bound",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "v_work_context_means",
+      "recommend_suppress",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_means",
+      "not_relevant",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_means",
+      "update_date",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_means",
+      "domain_source",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_percentages",
+      "onet_soc_code",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_percentages",
+      "title",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_percentages",
+      "element_id",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_percentages",
+      "element_name",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_percentages",
+      "scale_id",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_percentages",
+      "scale_name",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_percentages",
+      "category",
+      "INTEGER"
+    ],
+    [
+      "v_work_context_percentages",
+      "data_value",
+      "DECIMAL(18,2)"
+    ],
+    [
+      "v_work_context_percentages",
+      "n",
+      "INTEGER"
+    ],
+    [
+      "v_work_context_percentages",
+      "standard_error",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "v_work_context_percentages",
+      "lower_ci_bound",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "v_work_context_percentages",
+      "upper_ci_bound",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "v_work_context_percentages",
+      "recommend_suppress",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_percentages",
+      "not_relevant",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_percentages",
+      "update_date",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_percentages",
+      "domain_source",
+      "VARCHAR"
+    ],
+    [
+      "v_work_context_percentages",
+      "category_description",
+      "VARCHAR"
+    ],
+    [
+      "work_context",
+      "onet_soc_code",
+      "VARCHAR"
+    ],
+    [
+      "work_context",
+      "title",
+      "VARCHAR"
+    ],
+    [
+      "work_context",
+      "element_id",
+      "VARCHAR"
+    ],
+    [
+      "work_context",
+      "element_name",
+      "VARCHAR"
+    ],
+    [
+      "work_context",
+      "scale_id",
+      "VARCHAR"
+    ],
+    [
+      "work_context",
+      "scale_name",
+      "VARCHAR"
+    ],
+    [
+      "work_context",
+      "category",
+      "INTEGER"
+    ],
+    [
+      "work_context",
+      "data_value",
+      "DECIMAL(18,2)"
+    ],
+    [
+      "work_context",
+      "n",
+      "INTEGER"
+    ],
+    [
+      "work_context",
+      "standard_error",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "work_context",
+      "lower_ci_bound",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "work_context",
+      "upper_ci_bound",
+      "DECIMAL(18,4)"
+    ],
+    [
+      "work_context",
+      "recommend_suppress",
+      "VARCHAR"
+    ],
+    [
+      "work_context",
+      "not_relevant",
+      "VARCHAR"
+    ],
+    [
+      "work_context",
+      "update_date",
+      "VARCHAR"
+    ],
+    [
+      "work_context",
+      "domain_source",
+      "VARCHAR"
+    ],
+    [
+      "work_context_categories",
+      "element_id",
+      "VARCHAR"
+    ],
+    [
+      "work_context_categories",
+      "element_name",
+      "VARCHAR"
+    ],
+    [
+      "work_context_categories",
+      "scale_id",
+      "VARCHAR"
+    ],
+    [
+      "work_context_categories",
+      "scale_name",
+      "VARCHAR"
+    ],
+    [
+      "work_context_categories",
+      "category",
+      "INTEGER"
+    ],
+    [
+      "work_context_categories",
+      "category_description",
+      "VARCHAR"
+    ]
+  ],
+  "blocks": [
+    {
+      "block": 0,
+      "language": "sql",
+      "sha256": "b7ff44e08d13231441c060b4068b46f805b03ae906812853e66e954a405997b4",
+      "rows": [
+        [
+          "29-1216.00",
+          "General Internal Medicine Physicians",
+          "5.00",
+          null,
+          null,
+          22,
+          "08/2021"
+        ],
+        [
+          "29-1221.00",
+          "Pediatricians, General",
+          "4.99",
+          "4.9598",
+          "5.0000",
+          21,
+          "08/2020"
+        ],
+        [
+          "29-1126.00",
+          "Respiratory Therapists",
+          "4.98",
+          "4.9303",
+          "5.0000",
+          15,
+          "08/2026"
+        ],
+        [
+          "29-1292.00",
+          "Dental Hygienists",
+          "4.97",
+          "4.9019",
+          "5.0000",
+          17,
+          "08/2021"
+        ],
+        [
+          "29-1211.00",
+          "Anesthesiologists",
+          "4.94",
+          "4.8249",
+          "5.0000",
+          20,
+          "08/2026"
+        ],
+        [
+          "29-1229.03",
+          "Urologists",
+          "4.94",
+          "4.8397",
+          "5.0000",
+          15,
+          "08/2023"
+        ],
+        [
+          "31-2011.00",
+          "Occupational Therapy Assistants",
+          "4.94",
+          "4.8560",
+          "5.0000",
+          20,
+          "08/2022"
+        ],
+        [
+          "29-1021.00",
+          "Dentists, General",
+          "4.86",
+          "4.6616",
+          "5.0000",
+          20,
+          "08/2026"
+        ],
+        [
+          "29-1241.00",
+          "Ophthalmologists, Except Pediatric",
+          "4.86",
+          "4.6622",
+          "5.0000",
+          15,
+          "08/2022"
+        ],
+        [
+          "31-1132.00",
+          "Orderlies",
+          "4.86",
+          "4.7097",
+          "5.0000",
+          30,
+          "07/2016"
+        ],
+        [
+          "53-3011.00",
+          "Ambulance Drivers and Attendants, Except Emergency Medical Technicians",
+          "4.84",
+          "4.6299",
+          "5.0000",
+          22,
+          "08/2026"
+        ],
+        [
+          "29-1124.00",
+          "Radiation Therapists",
+          "4.78",
+          "4.5515",
+          "5.0000",
+          36,
+          "07/2013"
+        ],
+        [
+          "29-1215.00",
+          "Family Medicine Physicians",
+          "4.78",
+          "4.5122",
+          "5.0000",
+          21,
+          "08/2020"
+        ],
+        [
+          "29-2011.00",
+          "Medical and Clinical Laboratory Technologists",
+          "4.74",
+          "4.4123",
+          "5.0000",
+          32,
+          "08/2025"
+        ],
+        [
+          "29-2033.00",
+          "Nuclear Medicine Technologists",
+          "4.70",
+          "4.4894",
+          "4.9094",
+          39,
+          "07/2013"
+        ]
+      ],
+      "columns": [
+        "onet_soc_code",
+        "title",
+        "mean_exposure",
+        "lower_ci_bound",
+        "upper_ci_bound",
+        "n",
+        "update_date"
+      ]
+    },
+    {
+      "block": 1,
+      "language": "python",
+      "sha256": "5833c21f71150d988a2445dd445e04af6ffde7ba510731844846efa0c97624b6",
+      "status": "passed"
+    },
+    {
+      "block": 3,
+      "language": "python",
+      "sha256": "d60ec3dd67eb1fc5b48abc1709cbc3e96d2d8cd01cfd26c894c7f888f0e81b85",
+      "status": "passed"
+    },
+    {
+      "block": 5,
+      "language": "python",
+      "sha256": "dc2f8e66ee3c5b13ce20f51950ca09fbf9c1ee1fb511b09f4347dadca6cebc9e",
+      "status": "passed"
+    },
+    {
+      "block": 7,
+      "language": "sql",
+      "sha256": "1ecf45c04672fa6e2c590efbfe7ed6d63f859eb441abd38122210be7905a6e2e",
+      "rows": [
+        [
+          "Spend Time Standing",
+          "3.01",
+          34,
+          "0.4568",
+          "N",
+          "08/2021"
+        ],
+        [
+          "Spend Time Walking or Running",
+          "3.17",
+          34,
+          "0.3737",
+          "N",
+          "08/2021"
+        ],
+        [
+          "Spend Time Bending or Twisting Your Body",
+          "2.70",
+          33,
+          "0.3967",
+          "N",
+          "08/2021"
+        ]
+      ],
+      "columns": [
+        "element_name",
+        "data_value",
+        "n",
+        "standard_error",
+        "recommend_suppress",
+        "update_date"
+      ]
+    },
+    {
+      "block": 8,
+      "language": "sql",
+      "sha256": "02cbe45f46a898131e972975f6c0eada14e040776fdb09e8402436ae67c8b7ca",
+      "rows": [
+        [
+          1,
+          "Never",
+          "0.00",
+          "N",
+          "08/2021"
+        ],
+        [
+          2,
+          "Less than half the time",
+          "53.62",
+          "N",
+          "08/2021"
+        ],
+        [
+          3,
+          "About half the time",
+          "16.41",
+          "N",
+          "08/2021"
+        ],
+        [
+          4,
+          "More than half the time",
+          "5.22",
+          "N",
+          "08/2021"
+        ],
+        [
+          5,
+          "Continually or almost continually",
+          "24.75",
+          "N",
+          "08/2021"
+        ]
+      ],
+      "columns": [
+        "category",
+        "category_description",
+        "response_percent",
+        "recommend_suppress",
+        "update_date"
+      ]
+    },
+    {
+      "block": 9,
+      "language": "sql",
+      "sha256": "05514e8871777e76618aa8daef43834518ad7f63f35765cf49557ccfd25cc6d5",
+      "rows": [
+        [
+          "29-1216.00",
+          "General Internal Medicine Physicians",
+          "4.00",
+          "5.00"
+        ],
+        [
+          "29-1221.00",
+          "Pediatricians, General",
+          "4.00",
+          "4.99"
+        ],
+        [
+          "29-1126.00",
+          "Respiratory Therapists",
+          "3.88",
+          "4.98"
+        ],
+        [
+          "29-1292.00",
+          "Dental Hygienists",
+          "3.12",
+          "4.97"
+        ],
+        [
+          "29-1211.00",
+          "Anesthesiologists",
+          "4.00",
+          "4.94"
+        ],
+        [
+          "29-1229.03",
+          "Urologists",
+          "3.88",
+          "4.94"
+        ],
+        [
+          "31-2011.00",
+          "Occupational Therapy Assistants",
+          "3.88",
+          "4.94"
+        ],
+        [
+          "29-1021.00",
+          "Dentists, General",
+          "4.00",
+          "4.86"
+        ],
+        [
+          "29-1241.00",
+          "Ophthalmologists, Except Pediatric",
+          "4.00",
+          "4.86"
+        ],
+        [
+          "31-1132.00",
+          "Orderlies",
+          "3.38",
+          "4.86"
+        ],
+        [
+          "53-3011.00",
+          "Ambulance Drivers and Attendants, Except Emergency Medical Technicians",
+          "3.12",
+          "4.84"
+        ],
+        [
+          "29-1124.00",
+          "Radiation Therapists",
+          "3.38",
+          "4.78"
+        ],
+        [
+          "29-1215.00",
+          "Family Medicine Physicians",
+          "3.88",
+          "4.78"
+        ],
+        [
+          "29-2011.00",
+          "Medical and Clinical Laboratory Technologists",
+          "3.00",
+          "4.74"
+        ],
+        [
+          "29-2033.00",
+          "Nuclear Medicine Technologists",
+          "3.38",
+          "4.70"
+        ],
+        [
+          "29-1081.00",
+          "Podiatrists",
+          "3.88",
+          "4.69"
+        ],
+        [
+          "31-9092.00",
+          "Medical Assistants",
+          "4.00",
+          "4.68"
+        ],
+        [
+          "29-2061.00",
+          "Licensed Practical and Licensed Vocational Nurses",
+          "4.00",
+          "4.67"
+        ],
+        [
+          "29-1213.00",
+          "Dermatologists",
+          "3.88",
+          "4.63"
+        ],
+        [
+          "29-2032.00",
+          "Diagnostic Medical Sonographers",
+          "3.62",
+          "4.63"
+        ]
+      ],
+      "columns": [
+        "onet_soc_code",
+        "title",
+        "social_perceptiveness_importance",
+        "disease_exposure"
+      ]
+    }
+  ],
+  "live_default_ids": [
+    "eoir",
+    "ice",
+    "fec",
+    "clinicaltrials",
+    "cms-medicare",
+    "openpayments",
+    "dol-visas",
+    "ipeds-db",
+    "fjc",
+    "cbp",
+    "ussc",
+    "cook-sao",
+    "fjc-judges",
+    "scdb",
+    "open-policing",
+    "courtlistener"
+  ],
+  "candidate_ids": [
+    "eoir",
+    "ice",
+    "fec",
+    "clinicaltrials",
+    "cms-medicare",
+    "openpayments",
+    "dol-visas",
+    "ipeds-db",
+    "fjc",
+    "cbp",
+    "ussc",
+    "cook-sao",
+    "fjc-judges",
+    "scdb",
+    "open-policing",
+    "courtlistener",
+    "onet",
+    "qcew",
+    "fars"
+  ],
+  "artifact_sha256": "b7908bb82e50d4aa0310a6400e2193e2b11946a9d663ff2c8f1171037585c11b",
+  "scope": "Final Markdown Python and R examples executed for remote, discovery/schema, download and local modes. Standalone SQL executed with Python DuckDB. Registry fixture supplied through isolated Python cache / R registry option. Default URL separately returned 16 entries without the additions. Constructors bounded to 128MiB/one thread/no spill; INSTALL replaced with LOAD of preinstalled httpfs. No software installed. Python Hugging Face optional dependency is absent, so download used the immutable requests fallback. No claim that a different default shell import or current source checkout was tested."
+}

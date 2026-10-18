@@ -1,0 +1,25 @@
+# Build, validation and update details
+
+[Overview](../README.md) · [Dictionary](../DICTIONARY.md) · [Publication verification](../PUBLICATION.md)
+
+These detailed notes preserve the audited release documentation. Statements about local-only checks and later publication gates describe that earlier build stage; [PUBLICATION.md](../PUBLICATION.md) records the completed public-host verification. Catalog integration is still pending.
+
+
+The build uses Python 3.12, DuckDB 1.5.5 and the existing datapond-build helper from the already provisioned FJC judges virtual environment. `runtime.json` records the interpreter, every installed package/version, and the source module/hash of each used helper function. No software was installed for this candidate. In a separately provisioned environment, use the declared dependencies in `pyproject.toml`.
+
+```sh
+python -m unittest -v test_onet test_guard
+python onet.py --download --output releases/new-candidate
+```
+
+The downloader requires exact byte size and SHA-256 from `source-lock.json`; a changed upstream file fails closed. Recorded ETag/Last-Modified values are provenance, not substitutes for content hashes; a header-only change does not reject identical bytes. The source ZIP is 16,237,378 bytes, SHA-256 `55033fc68b4c13ec23e7f74dc6378660f6e854e75d55d6e333ae0a761d3987cd`. `schema.json` pins selected CSV members, their byte counts, SHA-256s, official row counts, headers, data types and dictionary links. An existing output directory is refused. Failures are retained for inspection; use a new candidate directory. A retained `.partial` source is never silently deleted; inspect it and choose a new `--archive` path to retry.
+
+The builder sets 256 MiB DuckDB memory, one thread, 128 MiB spill, strict CSV parsing and explicit decimal/text types. It checks 10 GiB free disk before building. On Linux use `python run_guarded.py evidence/new-run python onet.py --download --output releases/new-candidate` for the additional 768 MiB process-group RSS stop, 2 GiB cap over all files in this isolated repository (including retained attempts and Git files), 1.5 GiB available-memory floor and 15-minute deadline. Engine memory limits alone do not cap process RSS. The release build took about 14.3 seconds, with 230.5 MiB sampled peak process-group RSS; the artifact is 11,284,480 bytes. The guard receipt records its executable hash and complete command. Measurements are observations, not estimates inferred from ZIP size.
+
+Every row and typed cell is compared against an independent Python `csv`/`Decimal` pass through the original ZIP, including source order, both before checkpoint and after closing and reopening the persisted file read-only. Validation also checks keys, foreign references and labels, required fields, native scale ranges, flags, uncertainty, category grain, official counts, metadata and dictionary coverage. Category percentage sums must be within 0.03 percentage points of 100. Record-level examples, NULL counts and per-table typed fingerprints are retained in the build report. Source order is an audit device, not a stable query ordering contract; always specify `ORDER BY` for analytical output. ZIP members are streamed to fixed allowlisted filenames; no archive paths are extracted directly.
+
+The actual imported metadata helper is hashed and checked against `helper-lock.json`, derived from the source commit pinned in `pyproject.toml`. The build machine's installed distribution metadata still identifies v0.1.1; the used metadata implementation exactly matches the pinned source file, as computed in `runtime.json`. This is not a claim that a fresh dependency installation was tested.
+
+Run `python audit_release.py path/to/onet.duckdb` and `python validate_examples.py path/to/onet.duckdb` for release checks. The optional consumer harness accepts `--artifact`, `--rscript` and `--r-lib-root`; the latter points to existing `cran/datapond` and `patched/datapond` R libraries. It records installed R package file hashes, uses isolated caches, and loads only preinstalled httpfs. No packages are installed by these checks. The included local evidence tests Python DuckDB 1.5.4 and R DuckDB 1.5.5; public hosting must still be verified after publication.
+
+To update: select a specific upstream release; independently verify license and source URLs; create a new branch and lock/schema files from that release's dictionaries; review renamed tables, changed taxonomy and scale definitions; rebuild in a new directory under the supervisor; run all tests, all-cell comparison, example and Python/R HTTP consumer checks; obtain an independent Claude audit and resolve findings. Only then publish to the approved repository, verify the immutable remote artifact hash and real consumer queries, and open a separate registry PR. O*NET publishes quarterly with a primary third-quarter update; this repository does not claim an automated refresh schedule. Metadata timestamps make rebuild bytes non-identical; source identities and typed table fingerprints establish logical reproducibility.

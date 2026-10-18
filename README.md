@@ -1,115 +1,236 @@
-> **Published October 18, 2026:** see [verified public release and immutable query URL](PUBLICATION.md). Audit/status statements below record the frozen pre-publication snapshot. Registry discovery awaits draft PR review.
+# O*NET 31.0 Occupations, Skills and Work Context
 
----
-license: cc-by-4.0
-pretty_name: O*NET 31.0 Occupations, Skills and Work Context
-tags: [onet, occupations, skills, labor, work-context, duckdb]
-size_categories: [100K<n<1M]
----
+A version-pinned, queryable DuckDB subset of the [O*NET 31.0 Database](https://www.onetcenter.org/database.html): **468,857 rows across 12 tables (89 columns)**, three convenience views, datapond metadata and a column dictionary.
 
-# O*NET® 31.0 occupations, skills and work context
+Use it for descriptive questions about what occupations require and what their work is like: skill importance and level, how often workers stand, bend or are exposed to disease, and the alternate titles an occupation goes by. It does not contain wages, employment counts, health outcomes or any person-level records.
 
-A version-pinned, queryable subset of the [O*NET 31.0 Database](https://www.onetcenter.org/database.html): **468,857 source rows, 12 data tables, 3 convenience views**, plus datapond metadata and an 89-column dictionary.
+Download/query the [Hugging Face dataset](https://huggingface.co/datasets/Nason/onet-database). Published to Hugging Face on 2026-10-18. The datapond registry entry is a draft pull request, so `datapond.connect('onet')` does not resolve this database until it is merged; the direct URL below works now.
 
-This addition supports occupational questions about standing, bending, exposure to disease or infections, and skill requirements. It complements datapond's administrative datasets with descriptions of work. It does not measure illness, wages, employment counts or causal effects. QCEW industry employment and ATUS time use can supply different perspectives in separate analyses; they do not share a ready-made person or occupation key with these tables. There is no evidence of user demand or adoption implied by this selection.
+[Quick start](#quick-start) · [Tables](#tables) · [Views](#pre-built-views) · [Examples](#example-queries) · [Caveats](#researcher-caveats) · [Source](#data-source-and-version) · [License](#license-and-attribution) · [Build](#build-from-source) · [Changelog](#changelog)
 
-## Scope and grain
+## Quick Start
 
-| Table | Rows | Grain |
-|---|---:|---|
-| occupation_data | 1,016 | One O*NET-SOC 2019 occupation |
-| job_titles | 54,269 | Occupation × alternate title |
-| sample_of_reported_titles | 8,189 | Occupation × reported title |
-| essential_skills | 18,200 | Occupation × element × scale |
-| transferable_skills | 45,500 | Occupation × element × scale |
-| work_context | 305,389 | Occupation × element × scale × nullable category |
-| content_model_reference | 3,006 | Content-model element, including hierarchy nodes |
-| scales_reference | 33 | Scale ID |
-| level_scale_anchors | 483 | Element × scale × anchor value |
-| work_context_categories | 281 | Element × scale × category |
-| occupation_level_metadata | 32,280 | Occupation × item × response |
-| survey_booklet_locations | 211 | Element × scale × survey question |
+### DuckDB CLI
 
-Skill coverage is 910 occupations, with 10 essential and 25 transferable elements. Work-context coverage is 911 occupations and 57 elements. The 1,016 occupation records are not all rated in each domain. Reference tables intentionally include elements outside this subset. Other 31.0 files, including abilities, knowledge, software skills, tasks and crosswalks, are omitted. The full archive is retained as the pinned input, not represented as a full-database ingestion.
+```sql
+SET memory_limit = '128MiB';
+SET threads = 1;
+SET max_temp_directory_size = '0B';
+INSTALL httpfs;
+LOAD httpfs;
+ATTACH 'https://huggingface.co/datasets/Nason/onet-database/resolve/d0e84bacef02d4477423edbf7468cc3ec8fb79c2/onet.duckdb' AS onet (READ_ONLY);
 
-`v_skills` combines the two disjoint skill domains and adds `skill_domain`. `v_work_context_means` selects rows with no category; `v_work_context_percentages` joins category labels on the complete `(element_id, scale_id, category)` key. Neither view drops suppressed or missing-precision ratings. Views do not contribute to the registry row/table totals.
+-- Occupations with the highest mean reported exposure to disease or infection
+SELECT onet_soc_code, title, data_value AS mean_exposure, lower_ci_bound, upper_ci_bound, n, update_date
+FROM onet.v_work_context_means
+WHERE element_id = '4.C.2.c.1.b' AND scale_id = 'CX' AND recommend_suppress = 'N'
+ORDER BY data_value DESC, onet_soc_code
+LIMIT 15;
+```
 
-## Interpretation and joins
+The database is 11 MB. DuckDB fetches byte ranges as needed; transfer volume depends on the query. The examples use this immutable artifact URL:
 
-* Preserve the full ten-character `onet_soc_code`. Its detailed occupations may share a six-digit SOC parent; a crosswalk is not necessarily one-to-one. No SOC, NAICS, QCEW or ATUS crosswalk is included or implied.
-* `IM` is importance (1–5), `LV` is level (0–7). Work-context `CX` is a 1–5 mean and `CT` a 1–3 mean. `CXP` and `CTP` contain separate category percentages (0–100). Never pool their `data_value` values. Use the element-specific category labels and level anchors.
-* `recommend_suppress='Y'` marks low precision. Values are retained exactly; substantive ranking examples require explicit `'N'`, excluding missing flags as well. A missing flag does not mean reliable. `not_relevant='Y'` is a separate flag; a missing relevance flag is not an explicit `'N'`. For level comparisons, require explicit relevant and unsuppressed values.
-* Confidence bounds and standard errors preserve four decimal places. `n` is the source's rating sample size, not national employment. Analyst, incumbent, occupational-expert and transition sources have different methods. See the official [analyst](https://www.onetcenter.org/dictionary/31.0/csv/appendix_analyst.html) and [incumbent/expert](https://www.onetcenter.org/dictionary/31.0/csv/appendix_incumbent.html) statistics documentation. Do not infer independence or population confidence intervals by pooling ratings.
-* `update_date` retains the original `MM/YYYY` string. It is the month data were updated, not a uniformly observed year or collection day. The selected ratings span update months **December 2005–August 2026**; skills span June 2010–August 2026. This is one release snapshot, not an annual panel. Parsing with `strptime(update_date,'%m/%Y')` is useful for ordering only; the resulting first day is a computational placeholder.
-* An occupation has many titles, skills and context rows. Joining those tables without selecting/aggregating their grains multiplies rows. The final example first selects one skill and one context rating per occupation.
-* Category percentages sum to approximately 100 after source rounding, not to employee counts. Means cover 911 occupations; distributions cover 902. Preserve both and do not invent missing categories or estimates. The source's distributions all have their complete three or five categories in this release.
-* Exposure scores describe the occupation's reported work context. They do not measure infection incidence or individual health risk. No population denominator, causal model or personal inference is supplied.
+```
+https://huggingface.co/datasets/Nason/onet-database/resolve/d0e84bacef02d4477423edbf7468cc3ec8fb79c2/onet.duckdb
+```
 
-## Concrete queries
-
-Open the locally built artifact read-only:
+### Python (duckdb)
 
 ```python
 import duckdb
-con = duckdb.connect('releases/31.0-release-final/onet.duckdb', read_only=True)
-con.sql("SELECT * FROM _metadata").show()
+con = duckdb.connect(config={"memory_limit": "128MiB", "threads": "1", "max_temp_directory_size": "0B"})
+con.sql("INSTALL httpfs; LOAD httpfs;")
+con.sql("ATTACH 'https://huggingface.co/datasets/Nason/onet-database/resolve/d0e84bacef02d4477423edbf7468cc3ec8fb79c2/onet.duckdb' AS onet (READ_ONLY)")
+con.sql("SELECT * FROM onet._metadata").show()
+con.sql("""
+    SELECT skill_domain, element_name, data_value AS importance, lower_ci_bound, upper_ci_bound
+    FROM onet.v_skills
+    WHERE onet_soc_code = '29-1141.00' AND scale_id = 'IM' AND recommend_suppress = 'N'
+    ORDER BY data_value DESC, element_id LIMIT 10
+""").show()
+con.close()
 ```
 
-Which occupations have the highest reported exposure frequency, retaining uncertainty and update month?
+### R (DBI + duckdb)
+
+```r
+library(DBI)
+con <- dbConnect(duckdb::duckdb(config = list(memory_limit = "128MiB", threads = "1", max_temp_directory_size = "0B")))
+dbExecute(con, "INSTALL httpfs")
+dbExecute(con, "LOAD httpfs")
+dbExecute(con, "ATTACH 'https://huggingface.co/datasets/Nason/onet-database/resolve/d0e84bacef02d4477423edbf7468cc3ec8fb79c2/onet.duckdb' AS onet (READ_ONLY)")
+dbGetQuery(con, "SELECT onet_soc_code, title FROM onet.occupation_data ORDER BY onet_soc_code LIMIT 5")
+dbDisconnect(con, shutdown = TRUE)
+```
+
+In the tested R DuckDB 1.5.5 configuration, BIGINT and DECIMAL results are exposed as doubles. Counts here are exactly representable; decimal ratings and confidence bounds may be approximate in R even though the stored DECIMAL values are exact.
+
+### datapond package (after catalog integration)
+
+The public default catalog does not yet include `onet`. After its registry entry is merged, these examples use the package's normal discovery and connection API:
+
+```python
+import datapond
+print(datapond.list())
+datapond.describe('onet', table='work_context')
+con = datapond.connect('onet')
+con.sql('SELECT onet_soc_code, title FROM occupation_data ORDER BY onet_soc_code LIMIT 5').show()
+con.close()
+```
+
+```r
+library(datapond)
+dp_list()
+con <- dp_connect('onet')
+dp_describe(con, table = 'work_context')
+DBI::dbGetQuery(con, "SELECT onet_soc_code, title FROM occupation_data ORDER BY onet_soc_code LIMIT 5")
+dp_disconnect(con)
+```
+
+For repeated scans, after catalog integration, download once and connect locally:
+
+```python
+import datapond
+datapond.download('onet')
+con = datapond.connect('onet', local=True)
+con.sql('SELECT onet_soc_code, title FROM occupation_data ORDER BY onet_soc_code LIMIT 5').show()
+con.close()
+```
+
+```r
+library(datapond)
+dp_download('onet')
+con <- dp_connect('onet', local = TRUE)
+DBI::dbGetQuery(con, "SELECT onet_soc_code, title FROM occupation_data ORDER BY onet_soc_code LIMIT 5")
+dp_disconnect(con)
+```
+
+Verify the recorded artifact SHA-256 after downloading. In tested Python 0.1.1, the optional Hugging Face download path follows the default branch rather than the pinned URL; see [consumer verification](https://github.com/ian-nason/onet-database/blob/main/docs/CONSUMERS.md) for the tested configuration.
+
+Package checks use an isolated candidate registry; default-catalog discovery remains pending. See [consumer verification](https://github.com/ian-nason/onet-database/blob/main/docs/CONSUMERS.md) for exact client versions, paths, resource limits and download behavior. The direct URL examples above work independently of the catalog. The SQL examples below use the `onet` catalog alias from the direct-URL quick start.
+
+
+## Tables
+
+| Table | Description | Rows | Columns |
+|---|---|---:|---:|
+| `work_context` | Work-context scale means and separate response-category percentages; never pool scales/categories | 305,389 | 16 |
+| `job_titles` | Alternate job titles and original source codes; many titles per occupation | 54,269 | 5 |
+| `transferable_skills` | Transferable-skill importance and level ratings with uncertainty, flags and update month | 45,500 | 15 |
+| `occupation_level_metadata` | Collection modes, response rates and demographics; not population microdata | 32,280 | 7 |
+| `essential_skills` | Essential-skill importance and level ratings with uncertainty, flags and update month | 18,200 | 15 |
+| `sample_of_reported_titles` | Sample job titles reported by workers, with My Next Move display flag | 8,189 | 4 |
+| `content_model_reference` | Definitions of content-model elements, including hierarchy nodes beyond this subset | 3,006 | 3 |
+| `occupation_data` | O*NET-SOC 2019 occupation codes, titles and descriptions; one row per occupation | 1,016 | 3 |
+| `level_scale_anchors` | Illustrative descriptions for points on level scales; includes other O*NET domains | 483 | 6 |
+| `work_context_categories` | Labels keyed by element, scale and category for work-context response distributions | 281 | 6 |
+| `survey_booklet_locations` | Survey question identifiers keyed by element and scale; includes other domains | 211 | 5 |
+| `scales_reference` | Scale labels and native minimum/maximum values; no cross-scale normalization | 33 | 4 |
+
+Skill coverage is 910 occupations with 10 essential and 25 transferable elements. Work-context coverage is 911 occupations and 57 elements; distributions cover 902. The 1,016 occupation records are not all rated in each domain. Other 31.0 files (abilities, knowledge, software skills, tasks, crosswalks) are not loaded. `_metadata` has one row per data table; `_columns` carries original headers and descriptions.
+
+## Pre-built Views
+
+| View | What it does |
+|---|---|
+| `v_skills` | Union of `essential_skills` and `transferable_skills` with a `skill_domain` column; the two domains are disjoint |
+| `v_work_context_means` | `work_context` rows with no category: the CX (1 to 5) and CT (1 to 3) means |
+| `v_work_context_percentages` | CXP and CTP category percentages joined to their labels on the full `(element_id, scale_id, category)` key |
+
+No view drops suppressed or low-precision ratings; filter on `recommend_suppress` yourself. Views are not counted in the row and table totals above.
+
+## Example Queries
+
+Physical demands of registered nurses, one native mean per element:
 
 ```sql
-SELECT onet_soc_code,title,data_value AS mean_exposure,
-       lower_ci_bound,upper_ci_bound,n,update_date,domain_source
-FROM v_work_context_means
-WHERE element_id='4.C.2.c.1.b' AND scale_id='CX'
-  AND recommend_suppress='N'
-ORDER BY data_value DESC,onet_soc_code LIMIT 15;
+SELECT element_name, data_value, n, standard_error, recommend_suppress, update_date
+FROM onet.v_work_context_means
+WHERE onet_soc_code = '29-1141.00' AND scale_id = 'CX'
+  AND element_id IN ('4.C.2.d.1.b', '4.C.2.d.1.d', '4.C.2.d.1.h')
+ORDER BY element_id;
 ```
 
-Which skills have the highest importance for registered nurses?
+How nurses' standing time is distributed across response categories (percent of ratings, not of U.S. nurses):
 
 ```sql
-SELECT skill_domain,element_name,data_value AS importance,
-       standard_error,lower_ci_bound,upper_ci_bound,update_date
-FROM v_skills
-WHERE onet_soc_code='29-1141.00' AND scale_id='IM'
-  AND recommend_suppress='N'
-ORDER BY data_value DESC,element_id LIMIT 10;
+SELECT category, category_description, data_value AS response_percent, recommend_suppress, update_date
+FROM onet.v_work_context_percentages
+WHERE onet_soc_code = '29-1141.00' AND element_id = '4.C.2.d.1.b' AND scale_id = 'CXP'
+ORDER BY category;
 ```
 
-[examples.sql](examples.sql) also reports nurses' standing/walking/bending means, their standing-time response distribution, and a grain-safe comparison of social perceptiveness with disease exposure. Example results are saved with the artifact hash; rankings are descriptive and small differences should not be overinterpreted.
+Compare one skill with one context rating without a many-to-many join:
 
-## Reproduce and update
-
-The build uses Python 3.12, DuckDB 1.5.5 and the existing datapond-build helper from the already provisioned FJC judges virtual environment. `runtime.json` records the interpreter, every installed package/version, and the source module/hash of each used helper function. No software was installed for this candidate. In a separately provisioned environment, use the declared dependencies in `pyproject.toml`.
-
-```sh
-python -m unittest -v test_onet test_guard
-python onet.py --download --output releases/new-candidate
+```sql
+WITH skill AS (
+  SELECT onet_soc_code, title, data_value AS social_perceptiveness_importance
+  FROM onet.transferable_skills
+  WHERE element_id = '2.B.1.a' AND scale_id = 'IM' AND recommend_suppress = 'N'
+), exposure AS (
+  SELECT onet_soc_code, data_value AS disease_exposure
+  FROM onet.v_work_context_means
+  WHERE element_id = '4.C.2.c.1.b' AND scale_id = 'CX' AND recommend_suppress = 'N'
+)
+SELECT * FROM skill JOIN exposure USING (onet_soc_code)
+ORDER BY disease_exposure DESC, onet_soc_code LIMIT 20;
 ```
 
-The downloader requires exact byte size and SHA-256 from `source-lock.json`; a changed upstream file fails closed. Recorded ETag/Last-Modified values are provenance, not substitutes for content hashes; a header-only change does not reject identical bytes. The source ZIP is 16,237,378 bytes, SHA-256 `55033fc68b4c13ec23e7f74dc6378660f6e854e75d55d6e333ae0a761d3987cd`. `schema.json` pins selected CSV members, their byte counts, SHA-256s, official row counts, headers, data types and dictionary links. An existing output directory is refused. Failures are retained for inspection; use a new candidate directory. A retained `.partial` source is never silently deleted; inspect it and choose a new `--archive` path to retry.
+The full set is in [examples.sql](https://github.com/ian-nason/onet-database/blob/main/examples.sql); saved results are bound to the artifact hash.
 
-The builder sets 256 MiB DuckDB memory, one thread, 128 MiB spill, strict CSV parsing and explicit decimal/text types. It checks 10 GiB free disk before building. On Linux use `python run_guarded.py evidence/new-run python onet.py --download --output releases/new-candidate` for the additional 768 MiB process-group RSS stop, 2 GiB cap over all files in this isolated repository (including retained attempts and Git files), 1.5 GiB available-memory floor and 15-minute deadline. Engine memory limits alone do not cap process RSS. The release build took about 14.3 seconds, with 230.5 MiB sampled peak process-group RSS; the artifact is 11,284,480 bytes. The guard receipt records its executable hash and complete command. Measurements are observations, not estimates inferred from ZIP size.
+## Researcher Caveats
 
-Every row and typed cell is compared against an independent Python `csv`/`Decimal` pass through the original ZIP, including source order, both before checkpoint and after closing and reopening the persisted file read-only. Validation also checks keys, foreign references and labels, required fields, native scale ranges, flags, uncertainty, category grain, official counts, metadata and dictionary coverage. Category percentage sums must be within 0.03 percentage points of 100. Record-level examples, NULL counts and per-table typed fingerprints are retained in the build report. Source order is an audit device, not a stable query ordering contract; always specify `ORDER BY` for analytical output. ZIP members are streamed to fixed allowlisted filenames; no archive paths are extracted directly.
+1. **Scales are not interchangeable.** `IM` is importance (1 to 5), `LV` is level (0 to 7), `CX` is a 1 to 5 mean, `CT` a 1 to 3 mean, and `CXP`/`CTP` are category percentages (0 to 100). Never pool `data_value` across scales; use `scales_reference`, `level_scale_anchors` and `work_context_categories` for meaning.
+2. **Suppression and relevance flags.** `recommend_suppress='Y'` marks low precision; values are retained exactly. For rankings require an explicit `'N'`, which also excludes rows where the flag is missing. `not_relevant='Y'` is a separate flag; a missing value is not an explicit `'N'`.
+3. **Uncertainty is per rating.** `n` is the rating sample size, not employment. Standard errors and confidence bounds come from the analyst, incumbent, occupational-expert or transition methods documented by O*NET; do not pool ratings as if independent. See the official [analyst](https://www.onetcenter.org/dictionary/31.0/csv/appendix_analyst.html) and [incumbent/expert](https://www.onetcenter.org/dictionary/31.0/csv/appendix_incumbent.html) notes.
+4. **One snapshot, not a panel.** `update_date` keeps the source `MM/YYYY` string; selected ratings span December 2005 to August 2026 and skills span June 2010 to August 2026. Parsing with `strptime(update_date, '%m/%Y')` is for ordering only.
+5. **O*NET-SOC codes are ten characters.** Several detailed occupations share a six-digit SOC parent, so a crosswalk is not necessarily one-to-one. No SOC, NAICS, QCEW or ATUS crosswalk is included.
+6. **Grain multiplies.** An occupation has many titles, skills and context rows. Select or aggregate each table to one row per occupation before joining, as the comparison example does.
+7. **Percentages describe ratings.** Category percentages sum to about 100 after source rounding and are not worker counts. Exposure scores describe reported work context, not infection incidence or individual risk.
 
-The actual imported metadata helper is hashed and checked against `helper-lock.json`, derived from the source commit pinned in `pyproject.toml`. The build machine's installed distribution metadata still identifies v0.1.1; the used metadata implementation exactly matches the pinned source file, as computed in `runtime.json`. This is not a claim that a fresh dependency installation was tested.
+## Data Source and Version
 
-Run `python audit_release.py path/to/onet.duckdb` and `python validate_examples.py path/to/onet.duckdb` for release checks. The optional consumer harness accepts `--artifact`, `--rscript` and `--r-lib-root`; the latter points to existing `cran/datapond` and `patched/datapond` R libraries. It records installed R package file hashes, uses isolated caches, and loads only preinstalled httpfs. No packages are installed by these checks. The included local evidence tests Python DuckDB 1.5.4 and R DuckDB 1.5.5; public hosting must still be verified after publication.
+O*NET 31.0 Database, U.S. Department of Labor, Employment and Training Administration, developed by the National Center for O*NET Development. The pinned source ZIP is 16,237,378 bytes, SHA-256 `55033fc68b4c13ec23e7f74dc6378660f6e854e75d55d6e333ae0a761d3987cd`; 12 of its files are loaded. O*NET publishes quarterly with a primary third-quarter update; this repository does not promise an automatic refresh.
 
-To update: select a specific upstream release; independently verify license and source URLs; create a new branch and lock/schema files from that release's dictionaries; review renamed tables, changed taxonomy and scale definitions; rebuild in a new directory under the supervisor; run all tests, all-cell comparison, example and Python/R HTTP consumer checks; obtain an independent Claude audit and resolve findings. Only then publish to the approved repository, verify the immutable remote artifact hash and real consumer queries, and open a separate registry PR. O*NET publishes quarterly with a primary third-quarter update; this repository does not claim an automated refresh schedule. Metadata timestamps make rebuild bytes non-identical; source identities and typed table fingerprints establish logical reproducibility.
+Artifact: `onet.duckdb`, 11,284,480 bytes, SHA-256 `b7908bb82e50d4aa0310a6400e2193e2b11946a9d663ff2c8f1171037585c11b`, dataset commit `d0e84bacef02d4477423edbf7468cc3ec8fb79c2`.
 
-## Dictionary and codes
-
-[DICTIONARY.md](DICTIONARY.md) lists every column, original header, type, source file, NULL proportion, example and join hint. `_metadata` has one row per data table; `_columns` also stores original headers and descriptions. Original CSV empty fields map to SQL NULL, with no other string trimming or replacement. Numeric zeros stay zero. Invalid numeric/date tokens and excess decimal precision cause audit failure.
-
-Job-title `sources` retains comma-delimited string codes: `01` professional associations; `02` incumbents/occupational experts; `03` occupational code assignment; `04` SOC references; `07` government agencies; `08` USDOL/ETA and O*NET Center; `09` user input/web applications; `10` employer job postings. `shown_in_my_next_move` is the original Y/N display flag. Occupation-level `item` and `response` are source labels/codes describing collection and respondent composition, not attributes of every worker in the occupation; consult the versioned [occupation metadata dictionary](https://www.onetcenter.org/dictionary/31.0/csv/occupation_level_metadata.html) and its linked appendix for each item. No weights or person-level records are added.
-
-## Attribution, license and modifications
+## License and Attribution
 
 This product uses the **O*NET 31.0 Database**, produced by the **U.S. Department of Labor, Employment and Training Administration (USDOL/ETA)** and developed by the National Center for O*NET Development, under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/). See the [official database license](https://www.onetcenter.org/license_db.html). O*NET® is a trademark of USDOL/ETA.
 
 Datapond has modified the representation: selected 12 files; renamed columns to snake_case (`Date` → `update_date`); converted exact decimal/integer fields and empty fields to SQL types/NULL; added three views, metadata, dictionary, validation and examples. No source ratings, occupation titles, date tokens, flags or nonblank text values were revised, rescaled, imputed or suppressed. USDOL/ETA has not approved, endorsed or tested these modifications. The scripts and documentation describe every transformation. The database content license is CC BY 4.0; no public-domain claim is made. O*NET career exploration tools are outside this subset and this license statement.
 
-For citation, include O*NET release 31.0, USDOL/ETA, the CC BY 4.0 license link, this derivative's artifact SHA-256 and the recorded build date. Registry inclusion and public-host verification remain separate release gates.
+For citation, include O*NET release 31.0, USDOL/ETA, the CC BY 4.0 license link, this derivative's artifact SHA-256 and the recorded build date. Public-host verification is recorded in [PUBLICATION.md](https://github.com/ian-nason/onet-database/blob/main/PUBLICATION.md); catalog integration remains pending.
+
+## Build from Source
+
+The audited build uses Python 3.12 and DuckDB 1.5.5; dependency and helper revisions are pinned in `pyproject.toml` and `helper-lock.json`.
+
+```sh
+python -m unittest -v test_onet test_guard
+python run_guarded.py evidence/new-build python onet.py --download --output releases/new-candidate
+python run_guarded.py evidence/new-audit python audit_release.py releases/new-candidate/onet.duckdb
+```
+
+Use a fresh isolated checkout and output directory. The supervisor bounds memory, disk and runtime; source hashes fail closed. Every typed source cell is compared before checkpoint and after read-only reopen, and 27 regression fixtures cover failure cases. See [build, validation and update details](docs/REPRODUCE.md) for prerequisites, exact limits, source provenance, retained partials, measured resource use and the update procedure. See [the detailed researcher guide](docs/RESEARCHER-GUIDE.md) for the complete original interpretation and code notes.
+
+## GitHub, Dictionary and Website
+
+[Detailed researcher guide](https://github.com/ian-nason/onet-database/blob/main/docs/RESEARCHER-GUIDE.md) · [Build and update instructions](https://github.com/ian-nason/onet-database/blob/main/docs/REPRODUCE.md) · [Verified publication](https://github.com/ian-nason/onet-database/blob/main/PUBLICATION.md)
+
+- Source, build scripts, tests and evidence: [github.com/ian-nason/onet-database](https://github.com/ian-nason/onet-database)
+- Column dictionary (every column, original header, type, NULL share, join hint): [DICTIONARY.md](https://github.com/ian-nason/onet-database/blob/main/DICTIONARY.md)
+- Catalog: [datapond registry](https://github.com/datapond-db/registry); the entry for `onet` is a draft pull request and the database will appear on the [datapond website](https://datapond-db.github.io/website/) once it is merged.
+
+## Changelog
+
+### 2026-10-18 — Documentation refresh
+
+- Added Python/R quick starts, table descriptions and column counts, view guidance, navigation, and clearer researcher caveats.
+- Database bytes, schema, source locks and validated query results are unchanged. Catalog integration remains pending.
+
+### 2026-10-18 — Initial release
+
+- O*NET 31.0 subset: 468,857 rows across 12 tables (89 columns) and 3 views. Artifact 11,284,480 bytes, SHA-256 `b7908bb8…85c11b`, commit `d0e84bac`.
+- Every typed cell verified against an independent read of the pinned source ZIP; public immutable URL, HTTP range requests and the installed Python and R clients tested after upload.
+- Registry entry opened as a draft pull request; catalog integration pending.
