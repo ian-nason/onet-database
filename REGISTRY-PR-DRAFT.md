@@ -1,5 +1,7 @@
 # Add O*NET 31.0 occupations, skills and work context
 
+> Historical October 18, 2026 checkpoint: the text below is retained as the record of that stage, including its then-pending gates and earlier candidate hashes. It is not current availability or a new approval. Publication and catalog integration are now complete; see the [current README](README.md), [publication receipt](PUBLICATION.md) and [consumer guidance](docs/CONSUMERS.md).
+
 Adds `onet`: 468,857 rows in 12 data tables, with three convenience views,
 89 documented columns, and an 11,284,480-byte DuckDB artifact. This versioned
 subset supports occupational skills and work-context research, including

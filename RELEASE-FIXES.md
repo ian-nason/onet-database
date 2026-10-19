@@ -1,5 +1,7 @@
 # Six follow-up findings resolved
 
+> Historical October 18, 2026 checkpoint: the text below is retained as the record of that stage, including its then-pending gates and earlier candidate hashes. It is not current availability or a new approval. Publication and catalog integration are now complete; see the [current README](README.md), [publication receipt](PUBLICATION.md) and [consumer guidance](docs/CONSUMERS.md).
+
 This supplement follows the completed `03-followup` Claude review. Earlier reports, prompts, candidate artifacts and source commit `b98a8f4` remain preserved. The new release candidate is `releases/31.0-release-final/onet.duckdb`, SHA-256 `b7908bb82e50d4aa0310a6400e2193e2b11946a9d663ff2c8f1171037585c11b`, 11,284,480 bytes. The data and dictionary content match the earlier audited final candidate; metadata build time changes bytes.
 
 1. **Helper coverage:** `audit_release.py` resolves and hashes the source module of each imported helper function (`ensure_metadata`, `build_columns_table`, `export_dictionary`) and requires every hash to equal the pinned metadata implementation. The resulting mapping is in `runtime.json`; all three functions are in the same pinned module.

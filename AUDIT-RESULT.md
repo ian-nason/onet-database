@@ -1,5 +1,7 @@
 # O*NET 31.0 release checkpoint
 
+> Historical October 18, 2026 checkpoint: the text below is retained as the record of that stage, including its then-pending gates and earlier candidate hashes. It is not current availability or a new approval. Publication and catalog integration are now complete; see the [current README](README.md), [publication receipt](PUBLICATION.md) and [consumer guidance](docs/CONSUMERS.md).
+
 **Locally complete; not uploaded, registered or merged.** The proposed new repositories do not exist yet.
 
 Artifact: **468,857 rows / 12 data tables / 3 views / 89 dictionary columns**, **11,284,480 bytes**. SHA-256: `b7908bb82e50d4aa0310a6400e2193e2b11946a9d663ff2c8f1171037585c11b`. Source ZIP SHA-256: `55033fc68b4c13ec23e7f74dc6378660f6e854e75d55d6e333ae0a761d3987cd`.

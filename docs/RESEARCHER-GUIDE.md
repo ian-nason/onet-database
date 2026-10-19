@@ -8,9 +8,9 @@ These detailed notes preserve the audited release documentation. Statements abou
 
 A version-pinned, queryable subset of the [O*NET 31.0 Database](https://www.onetcenter.org/database.html): **468,857 source rows, 12 data tables, 3 convenience views**, plus datapond metadata and an 89-column dictionary.
 
-This addition supports occupational questions about standing, bending, exposure to disease or infections, and skill requirements. It complements datapond's administrative datasets with descriptions of work. It does not measure illness, wages, employment counts or causal effects. QCEW industry employment and ATUS time use can supply different perspectives in separate analyses; they do not share a ready-made person or occupation key with these tables. There is no evidence of user demand or adoption implied by this selection.
+This addition supports occupational questions about standing, bending, exposure to disease or infections, and skill requirements. It complements datapond's administrative datasets with descriptions of work. It does not measure illness, wages, employment counts or causal effects. QCEW industry employment and ATUS time use can supply different perspectives in separate analyses; they do not share a ready-made person or occupation key with these tables.
 
-## Scope and grain
+## Tables and what one row represents
 
 | Table | Rows | Grain |
 |---|---:|---|
@@ -29,7 +29,7 @@ This addition supports occupational questions about standing, bending, exposure 
 
 Skill coverage is 910 occupations, with 10 essential and 25 transferable elements. Work-context coverage is 911 occupations and 57 elements. The 1,016 occupation records are not all rated in each domain. Reference tables intentionally include elements outside this subset. Other 31.0 files, including abilities, knowledge, software skills, tasks and crosswalks, are omitted. The full archive is retained as the pinned input, not represented as a full-database ingestion.
 
-`v_skills` combines the two disjoint skill domains and adds `skill_domain`. `v_work_context_means` selects rows with no category; `v_work_context_percentages` joins category labels on the complete `(element_id, scale_id, category)` key. Neither view drops suppressed or missing-precision ratings. Views do not contribute to the registry row/table totals.
+`v_skills` combines the two disjoint skill domains and adds `skill_domain`. `v_work_context_means` selects rows with no category; `v_work_context_percentages` joins category labels on the complete `(element_id, scale_id, category)` key. None of these views drops suppressed or missing-precision ratings. Views do not contribute to the registry row/table totals.
 
 
 ## Interpretation and joins
@@ -46,11 +46,11 @@ Skill coverage is 910 occupations, with 10 essential and 25 transferable element
 
 ## Concrete queries
 
-Open the locally built artifact read-only:
+If you already have a local copy, replace the path below with its location. Otherwise use the remote quick start in the [overview](../README.md#quick-start). The SQL examples here assume this single database is the default catalog:
 
 ```python
 import duckdb
-con = duckdb.connect('releases/31.0-release-final/onet.duckdb', read_only=True)
+con = duckdb.connect('/path/to/onet.duckdb', read_only=True)
 con.sql("SELECT * FROM _metadata").show()
 ```
 
@@ -92,4 +92,4 @@ This product uses the **O*NET 31.0 Database**, produced by the **U.S. Department
 
 Datapond has modified the representation: selected 12 files; renamed columns to snake_case (`Date` → `update_date`); converted exact decimal/integer fields and empty fields to SQL types/NULL; added three views, metadata, dictionary, validation and examples. No source ratings, occupation titles, date tokens, flags or nonblank text values were revised, rescaled, imputed or suppressed. USDOL/ETA has not approved, endorsed or tested these modifications. The scripts and documentation describe every transformation. The database content license is CC BY 4.0; no public-domain claim is made. O*NET career exploration tools are outside this subset and this license statement.
 
-For citation, include O*NET release 31.0, USDOL/ETA, the CC BY 4.0 license link, this derivative's artifact SHA-256 and the recorded build date. Registry inclusion and public-host verification remain separate release gates.
+For citation, include O*NET release 31.0, USDOL/ETA, the CC BY 4.0 license link, this derivative's artifact SHA-256 and the recorded build date. Public-host verification and catalog integration are complete for this release; repeat both checks for each future release.

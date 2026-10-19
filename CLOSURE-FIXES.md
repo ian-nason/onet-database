@@ -1,5 +1,7 @@
 # Closure of review 04 findings
 
+> Historical October 18, 2026 checkpoint: the text below is retained as the record of that stage, including its then-pending gates and earlier candidate hashes. It is not current availability or a new approval. Publication and catalog integration are now complete; see the [current README](README.md), [publication receipt](PUBLICATION.md) and [consumer guidance](docs/CONSUMERS.md).
+
 The artifact remains b7908bb82e50d4aa0310a6400e2193e2b11946a9d663ff2c8f1171037585c11b. No ingestion, schema, source lock, dependency or artifact bytes changed after review 04.
 
 1. The exact `sources-31.0.json` intended for Hugging Face is now materialized and supplied for review, together with the card that links it. It includes build/source/runtime identities and accurately scopes review 04; later closure receipts live in the source repository. Final packaging must COPY this file unchanged, not generate new unreviewed claims or insert a future source-commit hash. The publication manifest separately records the final source commit.

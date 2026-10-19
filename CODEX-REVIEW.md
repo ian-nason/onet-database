@@ -1,5 +1,7 @@
 # Codex implementation and verification review
 
+> Historical October 18, 2026 checkpoint: the text below is retained as the record of that stage, including its then-pending gates and earlier candidate hashes. It is not current availability or a new approval. Publication and catalog integration are now complete; see the [current README](README.md), [publication receipt](PUBLICATION.md) and [consumer guidance](docs/CONSUMERS.md).
+
 Release artifact: `b7908bb82e50d4aa0310a6400e2193e2b11946a9d663ff2c8f1171037585c11b` (11,284,480 bytes). This is the primary Codex agent's implementation and verification review, not a claim that a separate Codex agent independently reran it.
 
 **Data validation:** all 468,857 rows and typed cells were compared with strict Python CSV/Decimal reads of the pinned official ZIP, including after close/read-only reopen. Counts match versioned official dictionaries. Required fields, keys, occupation/element/scale labels, native ranges, flags, category completeness, code lists and category sums pass. Schema, metadata and every dictionary field agree. Source content is unchanged across independently executed builds.

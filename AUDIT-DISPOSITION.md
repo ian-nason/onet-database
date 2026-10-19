@@ -1,5 +1,7 @@
 # Initial Claude audit dispositions
 
+> Historical October 18, 2026 checkpoint: the text below is retained as the record of that stage, including its then-pending gates and earlier candidate hashes. It is not current availability or a new approval. Publication and catalog integration are now complete; see the [current README](README.md), [publication receipt](PUBLICATION.md) and [consumer guidance](docs/CONSUMERS.md).
+
 Review session: `3320c216-da6d-407e-8235-8c264acb3426`.
 The initial report found no ingestion, typing, decimal, NULL, grain, suppression or license defect. It required stronger traceability before approval. This document records fixes; it is not a substitute for the follow-up review.
 
