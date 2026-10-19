@@ -25,6 +25,8 @@ Built with [onet-database](https://github.com/ian-nason/onet-database). Publishe
 
 ## Quick Start
 
+Choose one route: the [datapond package](#datapond-package) finds the database by catalog ID; the direct [Python](#python-duckdb), [R](#r-with-dbi-and-duckdb) and SQL examples use a fixed artifact URL. These are alternatives, not steps that must all be run. The SQL block requires a DuckDB SQL client.
+
 ### DuckDB CLI
 
 ```sql
@@ -43,13 +45,17 @@ ORDER BY data_value DESC, onet_soc_code
 LIMIT 15;
 ```
 
-The database is 11 MB. DuckDB fetches byte ranges as needed; transfer volume depends on the query. The examples use this immutable artifact URL:
+The database file is 10.8 MiB. DuckDB fetches byte ranges as needed; transfer volume depends on the query. File size is disk storage, not a RAM estimate. Remote queries still run on your machine and can transfer much of the file. A filter or `LIMIT` after a join or aggregate does not guarantee a small scan. The 128 MiB setting limits DuckDB's buffer pool, not the whole Python/R process; with spill disabled, a larger query can fail at that limit. Download only if you have room for the file, temporary download bytes and any existing copy.
+
+The examples use this immutable artifact URL:
 
 ```
 https://huggingface.co/datasets/Nason/onet-database/resolve/d0e84bacef02d4477423edbf7468cc3ec8fb79c2/onet.duckdb
 ```
 
 ### Python (duckdb)
+
+Install the Python dependency once in the environment that runs your query: `python -m pip install duckdb`.
 
 ```python
 import duckdb
@@ -66,7 +72,9 @@ con.sql("""
 con.close()
 ```
 
-### R (DBI + duckdb)
+### R with DBI and duckdb
+
+Install the R dependencies once: `install.packages(c("DBI", "duckdb"))`.
 
 ```r
 library(DBI)
@@ -82,13 +90,16 @@ In the tested R DuckDB 1.5.5 configuration, BIGINT and DECIMAL results are expos
 
 ### datapond package
 
-These examples use the public default catalog and the package's normal discovery and connection API:
+Install or upgrade the Python client with `python -m pip install --upgrade datapond`, or install the released R client from [CRAN](https://cran.r-project.org/package=datapond) with `install.packages("datapond")`. Remote examples are tested with Python datapond 0.1.5 (DuckDB 1.5.4) and CRAN R datapond 0.1.0 (DuckDB 1.5.5); older DuckDB reader versions are not verified here. R 0.1.1 is a separate development version, not the CRAN release.
+
+The examples below use the public default catalog. For limits set before attachment, use the direct DuckDB examples above; package examples here set limits immediately after connecting:
 
 ```python
 import datapond
 print(datapond.list())
 datapond.describe('onet', table='work_context')
 con = datapond.connect('onet')
+con.execute("SET memory_limit='128MiB'; SET threads=1; SET max_temp_directory_size='0B'")
 con.sql('SELECT onet_soc_code, title FROM occupation_data ORDER BY onet_soc_code LIMIT 5').show()
 con.close()
 ```
@@ -97,6 +108,7 @@ con.close()
 library(datapond)
 dp_list()
 con <- dp_connect('onet')
+DBI::dbExecute(con, "SET memory_limit='128MiB'; SET threads=1; SET max_temp_directory_size='0B'")
 dp_describe(con, table = 'work_context')
 DBI::dbGetQuery(con, "SELECT onet_soc_code, title FROM occupation_data ORDER BY onet_soc_code LIMIT 5")
 dp_disconnect(con)
@@ -120,12 +132,14 @@ DBI::dbGetQuery(con, "SELECT onet_soc_code, title FROM occupation_data ORDER BY 
 dp_disconnect(con)
 ```
 
-Verify the recorded artifact SHA-256 after downloading. In tested Python 0.1.1, the optional Hugging Face download path follows the default branch rather than the pinned URL; see [consumer verification](https://github.com/ian-nason/onet-database/blob/main/docs/CONSUMERS.md) for the tested configuration.
+Verify the recorded artifact SHA-256 after downloading. In Python datapond 0.1.5 as well as 0.1.1, the optional `huggingface_hub` download path follows the repository default branch rather than the pinned URL. For an exact-version copy, download the immutable URL shown above and verify its checksum; see [consumer verification](https://github.com/ian-nason/onet-database/blob/main/docs/CONSUMERS.md) for the tested configuration.
 
 Default-catalog discovery and representative remote queries were verified after the registry merge. Earlier full-download checks used an isolated candidate registry. See [consumer verification](https://github.com/ian-nason/onet-database/blob/main/docs/CONSUMERS.md) for exact client versions, paths, resource limits and download behavior. The direct URL examples above work independently of the catalog. The SQL examples below use the `onet` catalog alias from the direct-URL quick start.
 
 
 ## Tables
+
+A rating row describes one occupation, one element and one scale; work-context distributions also have a response category. Occupation records, alternate titles and reference tables have different units, listed below. Rating update months vary within this single release.
 
 | Table | Description | Rows | Columns |
 |---|---|---:|---:|
@@ -196,11 +210,11 @@ The full set is in [examples.sql](https://github.com/ian-nason/onet-database/blo
 ## Researcher Caveats
 
 1. **Scales are not interchangeable.** `IM` is importance (1 to 5), `LV` is level (0 to 7), `CX` is a 1 to 5 mean, `CT` a 1 to 3 mean, and `CXP`/`CTP` are category percentages (0 to 100). Never pool `data_value` across scales; use `scales_reference`, `level_scale_anchors` and `work_context_categories` for meaning.
-2. **Suppression and relevance flags.** `recommend_suppress='Y'` marks low precision; values are retained exactly. For rankings require an explicit `'N'`, which also excludes rows where the flag is missing. `not_relevant='Y'` is a separate flag; a missing value is not an explicit `'N'`.
+2. **Suppression and relevance flags.** `recommend_suppress='Y'` marks low precision; values are retained exactly. For rankings, require an explicit `'N'`, which also excludes rows where the flag is missing. `not_relevant='Y'` is a separate flag; a missing value is not an explicit `'N'`.
 3. **Uncertainty is per rating.** `n` is the rating sample size, not employment. Standard errors and confidence bounds come from the analyst, incumbent, occupational-expert or transition methods documented by O*NET; do not pool ratings as if independent. See the official [analyst](https://www.onetcenter.org/dictionary/31.0/csv/appendix_analyst.html) and [incumbent/expert](https://www.onetcenter.org/dictionary/31.0/csv/appendix_incumbent.html) notes.
 4. **One snapshot, not a panel.** `update_date` keeps the source `MM/YYYY` string; selected ratings span December 2005 to August 2026 and skills span June 2010 to August 2026. Parsing with `strptime(update_date, '%m/%Y')` is for ordering only.
 5. **O*NET-SOC codes are ten characters.** Several detailed occupations share a six-digit SOC parent, so a crosswalk is not necessarily one-to-one. No SOC, NAICS, QCEW or ATUS crosswalk is included.
-6. **Grain multiplies.** An occupation has many titles, skills and context rows. Select or aggregate each table to one row per occupation before joining, as the comparison example does.
+6. **Joins can multiply rows.** An occupation has many titles, skills and context rows. Select or aggregate each table to one row per occupation before joining, as the comparison example does.
 7. **Percentages describe ratings.** Category percentages sum to about 100 after source rounding and are not worker counts. Exposure scores describe reported work context, not infection incidence or individual risk.
 
 ## Data Source and Version

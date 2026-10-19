@@ -1,5 +1,7 @@
 # Verified public release
 
+> Historical checkpoint, recorded before catalog integration. The dataset is now in the public catalog: [registry PR #5](https://github.com/datapond-db/registry/pull/5) merged on October 18, 2026. The dated checks and version labels below are preserved; see [current consumer guidance](docs/CONSUMERS.md).
+
 Published October 18, 2026. [Dataset](https://huggingface.co/datasets/Nason/onet-database) and [immutable dataset commit](https://huggingface.co/datasets/Nason/onet-database/commit/d0e84bacef02d4477423edbf7468cc3ec8fb79c2). The corresponding registry submission is a draft PR; global datapond discovery is not claimed until that PR is merged.
 
 Artifact: `onet.duckdb`, 11,284,480 bytes, SHA-256 `b7908bb82e50d4aa0310a6400e2193e2b11946a9d663ff2c8f1171037585c11b`. All four uploaded files were streamed anonymously from the immutable public commit and matched their frozen sizes/checksums. A 4096-byte range request returned HTTP 206 with the exact Content-Range and original bytes. See publication/public-byte-verification.json.

@@ -1,5 +1,7 @@
 # Exact proposed O*NET publication
 
+> Historical October 18, 2026 checkpoint: the text below is retained as the record of that stage, including its then-pending gates and earlier candidate hashes. It is not current availability or a new approval. Publication and catalog integration are now complete; see the [current README](README.md), [publication receipt](PUBLICATION.md) and [consumer guidance](docs/CONSUMERS.md).
+
 These are proposed destinations on the verified existing accounts. No account,
 credential, token scope or persistent access setting needs to change.
 
